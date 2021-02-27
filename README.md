@@ -24,6 +24,7 @@ book reader application
 ### State management
 ## Bakc-end development
 ### Provide database documentation
+Data model structure designed in draw.io, and your access via [this link](https://drive.google.com/file/d/1vgvq7cNwpcDk_zDo7BsD71i2DSW-TX6h/view?usp=sharing)
 ### Create API Model
 ### Provide API routes
 ### Write Test API collection
@@ -35,7 +36,7 @@ book reader application
 - [ ] purchase
 - [ ] Searhc
 - [ ] Category
- -[ ] Book information
+- [ ] Book information
 - [ ] Discovery Page
 - [ ] Open a Book
 - [ ] Book Download Management
