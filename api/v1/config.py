@@ -1,0 +1,5 @@
+DB_NAME = "app"
+DB_USER = "edris"
+DB_PASSWORD = "11100077"
+DB_HOST = "127.0.0.1"
+DB_PORT = "5432"
