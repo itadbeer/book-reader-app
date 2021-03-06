@@ -95,14 +95,36 @@ the API._**
 | 2 | add | name: str, description: str | adds a new publisher | Boolean |
 | 3 | update | publisher_id: int, publisher_name: str, publisher_description: str | updates publisher based on given id | Boolean |
 | 4 | delete | publisher_id: int | deletes a specific publisher based on given id | Boolean |
-| 5 | get_all |  | gets all publishers with their details (id, name) | List |
+| 5 | get_all |  | gets all publishers with their details (id, name, description) | List |
 | 6 | count |  | gets how many publisher we have in total | integer |
 | 7 | exist | publisher_id: int | check if a specific publisher with a given id exists | Boolean |
 
 8. Author
-9. Translator
-10. SMS
-11. SMS Token
+
+| No | Name | Parameters | Description | return Value |
+|-|-|-|-|-|
+| 1 | create_table |  | if the table does not exist, this method will create it. this is cool for migration and running in different environments | Boolean |
+| 2 | add | name: str, description: str | adds a new author | Boolean |
+| 3 | update | author_id: int, author_name: str, author_description: str | updates author based on given id | Boolean |
+| 4 | delete | author_id: int | deletes a specific author based on given id | Boolean |
+| 5 | get_all |  | gets all authors with their details (id, name, description) | List |
+| 6 | count |  | gets how many author we have in total | integer |
+| 7 | exist | author_id: int | check if a specific author with a given id exists | Boolean |
+
+10. Translator
+
+| No | Name | Parameters | Description | return Value |
+|-|-|-|-|-|
+| 1 | create_table |  | if the table does not exist, this method will create it. this is cool for migration and running in different environments | Boolean |
+| 2 | add | name: str, description: str | adds a new translator | Boolean |
+| 3 | update | translator_id: int, translator_name: str, translator_description: str | updates translator based on given id | Boolean |
+| 4 | delete | translator_id: int | deletes a specific translator based on given id | Boolean |
+| 5 | get_all |  | gets all translators with their details (id, name, description) | List |
+| 6 | count |  | gets how many translator we have in total | integer |
+| 7 | exist | translator_id: int | check if a specific translator with a given id exists | Boolean |
+
+11. SMS
+12. SMS Token
 ### Provide API routes
 ### Write Test API collection
 ## Test
