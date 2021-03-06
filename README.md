@@ -54,20 +54,13 @@ the API._**
 |-|-|-|-|-|
 | 1 | create_table |  | if the table does not exist, this method will create it. this is cool for migration and running in different environments | Boolean |
 | 2 | add | mobile: str | adds a new user | Boolean |
-| 3 | add_book | user_id: str, book_id | adds a new book for the user | 
-   Boolean |
-| 3 | update | user_id:int, user_mobile:str | updates user details based on 
-   given id | Boolean |
-| 4 | delete | user_id:int | deletes a specific user based on given id | 
-   Boolean |
-| 5 | get_all |  | get all users with their details (id, books,mobile) | 
-   List |
-| 6 | exist | mobile:str | check if a specific user with a given mobile exists 
-   | Boolean |
-| 7 | request_login | mobile:str | sends a random token to user mobile and 
-   saves that token in redis Key-Value DataBase | Boolean |
-| 8 | verify_login | mobile:str, user_token:str | check if the given token and mobile are pair | Boolean |
- 
+| 3 | add_book | user_id: str, book_id | adds a new book for the user | Boolean |
+| 4 | update | user_id:int, user_mobile:str | updates user details based on given id | Boolean |
+| 5 | delete | user_id:int | deletes a specific user based on given id | Boolean |
+| 6 | get_all |  | get all users with their details (id, books,mobile) | List |
+| 7 | exist | mobile:str | check if a specific user with a given mobile exists | Boolean |
+| 8 | request_login | mobile:str | sends a random token to user mobile and saves that token in redis Key-Value DataBase | Boolean |
+| 9 | verify_login | mobile:str, user_token:str | check if the given token and mobile are pair | Boolean |
 
 3. Book
 4. Category
