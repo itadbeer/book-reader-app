@@ -124,7 +124,18 @@ the API._**
 | 7 | exist | translator_id: int | check if a specific translator with a given id exists | Boolean |
 
 11. SMS
-12. SMS Token
+
+| No | Name | Parameters | Description | return Value |
+|-|-|-|-|-|
+| 1 | send_token | token: str, receptor: str, template: str | send verification sms to receptor mobile | List |
+
+13. SMS Token
+
+| No | Name | Parameters | Description | return Value |
+|-|-|-|-|-|
+| 1 | create | expire: int | Creates a random token which will be inactive after ```expire``` seconds | Void |
+| 1 | verify | token: str | Check if token is pair with receptor mobile | Boolean |
+
 ### Provide API routes
 ### Write Test API collection
 ## Test
