@@ -88,10 +88,21 @@ the API._**
 | 7 | exist | category_id: int | check if a specific category with a given id exists | Boolean |
 
 6. Publisher
-7. Author
-8. Translator
-9. SMS
-10. SMS Token
+
+| No | Name | Parameters | Description | return Value |
+|-|-|-|-|-|
+| 1 | create_table |  | if the table does not exist, this method will create it. this is cool for migration and running in different environments | Boolean |
+| 2 | add | name: str, description: str | adds a new publisher | Boolean |
+| 3 | update | publisher_id: int, publisher_name: str, publisher_description: str | updates publisher based on given id | Boolean |
+| 4 | delete | publisher_id: int | deletes a specific publisher based on given id | Boolean |
+| 5 | get_all |  | gets all publishers with their details (id, name) | List |
+| 6 | count |  | gets how many publisher we have in total | integer |
+| 7 | exist | publisher_id: int | check if a specific publisher with a given id exists | Boolean |
+
+8. Author
+9. Translator
+10. SMS
+11. SMS Token
 ### Provide API routes
 ### Write Test API collection
 ## Test
