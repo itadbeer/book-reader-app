@@ -5,10 +5,14 @@ from sms import SMS
 
 
 class Admin(Token):
-    def __init__(self):
+    def __init__(self, mobile):
+        super().__init__(mobile)
         self.table_name = "admin"
         db.do_connect()
         self.create_table()
+
+    def __del__(self):
+        db.disconnect()
 
     def create_table(self):
         query = f"""
@@ -37,11 +41,10 @@ class Admin(Token):
         """ Get all of categories and return as a List """
         query = f"SELECT * FROM {self.table_name}"
         try:
-            admins: List[Any] = db.cursor.execute(query).fetchall()
+            db.cursor.execute(query)
+            admins: List[Any] = db.cursor.fetchall()
         except db.Error:
             return []
-        finally:
-            db.disconnect()
         admins_array = []
         for admin in admins:
             admin_dict = {
@@ -52,8 +55,8 @@ class Admin(Token):
 
     def exist(self, email: str, mobile: str) -> bool:
         query = f"SELECT COUNT (*) FROM {self.table_name} WHERE email=%s OR mobile=%s"
-        count = db.cursor.execute(query, (email, mobile)).fetchone()[0]
-        db.disconnect()
+        db.cursor.execute(query, (email, mobile))
+        count = db.cursor.fetchone()[0]
         return int(count) > 0
 
     def request_login(self, mobile) -> bool:

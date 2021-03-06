@@ -35,7 +35,8 @@ class Author:
         """ Get all of categories and return as a List """
         query = f"SELECT * FROM {self.table_name}"
         try:
-            authors: List[Any] = db.cursor.execute(query).fetchall()
+            db.cursor.execute(query)
+            authors: List[Any] = db.cursor.fetchall()
         except db.Error:
             return []
         finally:
@@ -50,12 +51,14 @@ class Author:
 
     def count(self) -> int:
         query = f"SELECT count(*) FROM {self.table_name}"
-        count = db.cursor.execute(query).fetchone()[0]
+        db.cursor.execute(query)
+        count = db.cursor.fetchone()[0]
         db.disconnect()
         return int(count)
 
     def exist(self, author_id: int) -> bool:
         query = f"SELECT COUNT (*) FROM {self.table_name} WHERE id=%s"
-        count = db.cursor.execute(query, (author_id,)).fetchone()[0]
+        db.cursor.execute(query, (author_id,))
+        count = db.cursor.fetchone()[0]
         db.disconnect()
         return int(count) > 0
