@@ -1,6 +1,8 @@
 from user import User
-user = User()
-user.add("09215403947")
-print(user.exist("09215403947"))
-user.add_book(25,1)
-print(user.get_all())
+from book import Book
+from author import Author
+from publisher import Publisher
+from translator import Translator
+
+book = Book()
+print(book.get(2))
