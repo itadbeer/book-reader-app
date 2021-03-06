@@ -1,20 +1,20 @@
 from kavenegar import *
-
+from typing import List, Any
 from config import *
 
 
 class SMS:
     @staticmethod
-    def send_token(token: str, receptor: str):
+    def send_token(token: str, receptor: str, template: str = "verify") -> List:
         try:
             api = KavenegarAPI(SMS_API_KEY)
             params = {
                 'receptor': receptor,
                 'token': token,
-                'template': 'verify'
+                'template': template
             }
             return api.verify_lookup(params)
-        except APIException as e:
-            print(str(e))
-        except HTTPException as e:
-            print(str(e))
+        except APIException as error:
+            return []
+        except HTTPException as error:
+            return []

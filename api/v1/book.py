@@ -32,7 +32,7 @@ class Book:
     int, image: str, discount_percentage: int, pages_count: int,
             publisher_id: List,
             category_id: List, translator_id: List, publish_date: str) -> bool:
-        query = f"INSERT INTO {self.table_name} (name, description,author_id, " \
+        query = f"INSERT INTO {self.table_name} (name, description,author_id, " \ 
                 f"price,image,discount_percentage,pages_count," \
                 f"publisher_id,category_id,translator_id,publish_date) VALUES (" \
                 f"%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
