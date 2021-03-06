@@ -39,16 +39,36 @@ the API._**
 
 | No | Name | Parameters | Description | return Value |
 |-|-|-|-|-|
-| 1 | create_table |  | if the table does not exists, this method will create it. this is cool for migration and running in different environments | Void |
+| 1 | create_table |  | if the table does not exist, this method will create it. this is cool for migration and running in different environments | Void |
 | 2 | add | name:str, email:str, mobile: str | adds a new admin | Boolean |
 | 3 | update | admin_id:int, admin_name:str, admin_email:str,  admin_mobile:str | updates admin details based on given id | Boolean |
-| 4 | delete | admin_id:int | deletes specefic admin based on given id | Boolean |
+| 4 | delete | admin_id:int | deletes a specific admin based on given id | Boolean |
 | 5 | get_all |  | get all admins with their details (id, name, email, mobile) | List |
 | 6 | exist | mobile:str | check if a specific admin with a given mobile exists | Boolean |
 | 7 | request_login | mobile:str | sends a random token to admin mobile and saves that token in redis Key-Value DataBase | Boolean |
 | 8 | verify_login | mobile:str, user_token:str | check if the given token and mobile are pair | Boolean |
 
 2. User
+
+| No | Name | Parameters | Description | return Value |
+|-|-|-|-|-|
+| 1 | create_table |  | if the table does not exist, this method will create it. this is cool for migration and running in different environments | Boolean |
+| 2 | add | mobile: str | adds a new user | Boolean |
+| 3 | add_book | user_id: str, book_id | adds a new book for the user | 
+   Boolean |
+| 3 | update | user_id:int, user_mobile:str | updates user details based on 
+   given id | Boolean |
+| 4 | delete | user_id:int | deletes a specific user based on given id | 
+   Boolean |
+| 5 | get_all |  | get all users with their details (id, books,mobile) | 
+   List |
+| 6 | exist | mobile:str | check if a specific user with a given mobile exists 
+   | Boolean |
+| 7 | request_login | mobile:str | sends a random token to user mobile and 
+   saves that token in redis Key-Value DataBase | Boolean |
+| 8 | verify_login | mobile:str, user_token:str | check if the given token and mobile are pair | Boolean |
+ 
+
 3. Book
 4. Category
 5. Publisher
