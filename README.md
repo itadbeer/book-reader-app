@@ -68,19 +68,30 @@ the API._**
 |-|-|-|-|-|
 | 1 | create_table |  | if the table does not exist, this method will create it. this is cool for migration and running in different environments | Boolean |
 | 2 | add | name: str, description: str, author_id: List, price: int, image: str, discount_percentage: int, pages_count: int, publisher_id: List, category_id: List, translator_id: List, publish_date: str | adds a new book | Boolean |
-| 3 | update | ubook_id: int, name: str, description: str, author_id: List, price: int, image: str, discount_percentage: int, pages_count: int, publisher_id: List, category_id: List, translator_id: List, publish_date: str| updates book details based on given id | Boolean |
+| 3 | update | book_id: int, name: str, description: str, author_id: List, price: int, image: str, discount_percentage: int, pages_count: int, publisher_id: List, category_id: List, translator_id: List, publish_date: str| updates book details based on given id | Boolean |
 | 4 | delete | book_id: int | deletes a specific book based on given id | Boolean |
-| 5 | get | book_id: int | get book information (id, name,description,...) based on a given id | List |
-| 6 | get_all |  | get all books with their details (id, name,description,...) | List |
-| 7 | count |  | get how many books we have in total | integer |
-| 8 | exist | book_id:str | check if a specific book with a given id exists | Boolean |
+| 5 | get | book_id: int | gets book information (id, name,description,...) based on a given id | List |
+| 6 | get_all |  | gets all books with their details (id, name,description,...) | List |
+| 7 | count |  | gets how many books we have in total | integer |
+| 8 | exist | book_id: int | check if a specific book with a given id exists | Boolean |
 
 4. Category
-5. Publisher
-6. Author
-7. Translator
-8. SMS
-9. SMS Token
+
+| No | Name | Parameters | Description | return Value |
+|-|-|-|-|-|
+| 1 | create_table |  | if the table does not exist, this method will create it. this is cool for migration and running in different environments | Boolean |
+| 2 | add | name: str | adds a new category | Boolean |
+| 3 | update | category_id: int, category_name: str | updates category details based on given id | Boolean |
+| 4 | delete | category_id: int | deletes a specific category based on given id | Boolean |
+| 5 | get_all |  | gets all categories with their details (id, name) | List |
+| 6 | count |  | gets how many category we have in total | integer |
+| 7 | exist | category_id: int | check if a specific category with a given id exists | Boolean |
+
+6. Publisher
+7. Author
+8. Translator
+9. SMS
+10. SMS Token
 ### Provide API routes
 ### Write Test API collection
 ## Test
