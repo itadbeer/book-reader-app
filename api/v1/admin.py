@@ -24,21 +24,30 @@ class Admin(Token):
 
     def add(self, name: str, email: str, mobile: str) -> bool:
         query = f"INSERT INTO {self.table_name} (name, email, mobile) VALUES (%s,%s,%s)"
-        db.cursor.execute(query, (name, email, mobile))
-        return True
+        try:
+            db.cursor.execute(query, (name, email, mobile))
+            return True
+        except db.Error as error:
+            return False
 
     def update(self, admin_id: int, admin_name: str, admin_email: str, admin_mobile: str) -> bool:
-        query = f"UPDATE {self.table_name} SET name=%s,email=%s,mobile=%s WHERE id=%s"
-        db.cursor.execute(query, (admin_name, admin_email, admin_mobile, admin_id))
-        return True
+        query = f"UPDATE {self.table_name} SET name=%s,email=%s,mobile=%s " \
+                f"WHERE id=%s "
+        try:
+            db.cursor.execute(query, (admin_name, admin_email, admin_mobile, admin_id))
+            return True
+        except db.Error as error:
+            return False
 
-    def delete(self, admin_id: int):
+    def delete(self, admin_id: int) -> bool:
         query = f"DELETE FROM {self.table_name} WHERE id=%s"
-        db.cursor.execute(query, (admin_id,))
-        return True
+        try:
+            db.cursor.execute(query, (admin_id,))
+            return True
+        except db.Error as error:
+            return False
 
     def get_all(self) -> List:
-        """ Get all of categories and return as a List """
         query = f"SELECT * FROM {self.table_name}"
         try:
             db.cursor.execute(query)
@@ -53,13 +62,13 @@ class Admin(Token):
             admins_array.append(admin_dict)
         return admins_array
 
-    def exist(self, email: str, mobile: str) -> bool:
-        query = f"SELECT COUNT (*) FROM {self.table_name} WHERE email=%s OR mobile=%s"
-        db.cursor.execute(query, (email, mobile))
+    def exist(self, mobile: str) -> bool:
+        query = f"SELECT COUNT (*) FROM {self.table_name} WHERE mobile=%s"
+        db.cursor.execute(query, (mobile,))
         count = db.cursor.fetchone()[0]
         return int(count) > 0
 
-    def request_login(self, mobile) -> bool:
+    def request_login(self, mobile:str) -> bool:
         token = Token(mobile).create()
         # Send SMS containing Token to the mobile
         sms_result = SMS.send_token(token, mobile)
@@ -68,5 +77,5 @@ class Admin(Token):
         else:
             return False
 
-    def verify_login(self, mobile, user_token) -> bool:
+    def verify_login(self, mobile:str, user_token:str) -> bool:
         return Token(mobile).verify(user_token)
