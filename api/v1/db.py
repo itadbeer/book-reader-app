@@ -16,9 +16,6 @@ def do_connect():
         connection.set_session(autocommit=True)
         # Create a cursor to perform database operations
         cursor = connection.cursor()
-        # Print PostgreSQL details
-        print("PostgreSQL server information")
-        # Executing a SQL query
     except (Exception, Error) as error:
         print("Error while connecting to PostgreSQL", error)
 

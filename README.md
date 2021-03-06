@@ -138,6 +138,7 @@ the API._**
 
 ### Provide API routes
 ### Write Test API collection
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/533804fb4a9b101b5edb)
 ## Test
 
 ## App features

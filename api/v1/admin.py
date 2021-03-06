@@ -5,8 +5,7 @@ from sms import SMS
 
 
 class Admin(Token):
-    def __init__(self, mobile):
-        super().__init__(mobile)
+    def __init__(self):
         self.table_name = "admin"
         db.do_connect()
         self.create_table()
