@@ -1,5 +1,5 @@
 import db
-from typing import List, Any
+from typing import List, Any, Dict
 
 
 class Category:
@@ -43,6 +43,20 @@ class Category:
         except db.Error as error:
             return False
 
+    def get(self, category_id) -> Dict:
+        query = f"SELECT * FROM {self.table_name} WHERE id=%s"
+        category_dict = {}
+        try:
+            db.cursor.execute(query,(category_id,))
+            category: List[Any] = db.cursor.fetchall()
+        except db.Error:
+            return category_dict
+        for details in category:
+            category_dict = {
+                'id': details[0], 'name': details[1]
+            }
+        return category_dict
+
     def get_all(self) -> List:
         """ Get all of categories and return as a List """
         query = f"SELECT * FROM {self.table_name}"
@@ -51,8 +65,6 @@ class Category:
             categories: List[Any] = db.cursor.fetchall()
         except db.Error:
             return []
-        finally:
-            db.disconnect()
         categories_array = []
         for category in categories:
             category_dict = {

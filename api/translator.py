@@ -1,5 +1,5 @@
 import db
-from typing import List, Any
+from typing import List, Any, Dict
 
 
 class Translator:
@@ -45,6 +45,17 @@ class Translator:
             return True
         except db.Error as error:
             return False
+
+    def get(self, translator_id:int) -> Dict:
+        translator_dict = {}
+        query = f"SELECT * FROM {self.table_name} WHERE id=%s"
+        try:
+            db.cursor.execute(query,(translator_id,))
+            translator: List[Any] = db.cursor.fetchone()
+        except db.Error as error:
+            return translator_dict
+        translator_dict = {'id': translator[0], 'name': translator[1], 'description': translator[2]}
+        return translator_dict
 
     def get_all(self) -> List:
         """ Get all of categories and return as a List """

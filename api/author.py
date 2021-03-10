@@ -1,5 +1,5 @@
 import db
-from typing import List, Any
+from typing import List, Any, Dict
 
 
 class Author:
@@ -45,6 +45,17 @@ class Author:
             return True
         except db.Error as error:
             return False
+
+    def get(self, author_id:int) -> Dict:
+        author_dict = {}
+        query = f"SELECT * FROM {self.table_name} WHERE id=%s"
+        try:
+            db.cursor.execute(query,(author_id,))
+            author: List[Any] = db.cursor.fetchone()
+        except db.Error as error:
+            return author_dict
+        author_dict = {'id': author[0], 'name': author[1], 'description': author[2]}
+        return author_dict
 
     def get_all(self) -> List:
         """ Get all of categories and return as a List """

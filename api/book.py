@@ -1,5 +1,5 @@
 import db
-from typing import List, Any
+from typing import List, Any, Dict
 
 
 class Book:
@@ -29,7 +29,7 @@ class Book:
             return False
 
     def add(self, *, name: str, description: str, author_id: List, price:
-    int, image: str, discount_percentage: int, pages_count: int,
+            int, image: str, discount_percentage: int, pages_count: int,
             publisher_id: List,
             category_id: List, translator_id: List, publish_date: str) -> bool:
         query = f"INSERT INTO {self.table_name} (name, description,author_id, " \
@@ -55,7 +55,7 @@ class Book:
                publish_date: str) -> bool:
         query = f"UPDATE {self.table_name} SET name=%s,description=%s," \
                 f"author_id=%s,price=%s,image=%s,discount_percentage=%s," \
-                f"pages_count=%s,publisher_id=%s,category_id=%s,publish_date " \
+                f"pages_count=%s,publisher_id=%s,category_id=%s," \
                 f"translator_id=%s, publish_date=%s WHERE id=%s"
         try:
             db.cursor.execute(query,
@@ -70,31 +70,35 @@ class Book:
 
     def delete(self, book_id: int):
         query = f"DELETE FROM {self.table_name} WHERE id=%s"
-        db.cursor.execute(query, (book_id,))
-        return True
+        try:
+            db.cursor.execute(query, (book_id,))
+            return True
+        except db.Error as error:
+            return False
 
-    def get(self, book_id: int) -> List:
+    def get(self, book_id: int) -> Dict:
         query = f"SELECT * FROM {self.table_name} WHERE id=%s"
+        book_dict = {}
         try:
             db.cursor.execute(query, (book_id,))
             book_details: List[Any] = db.cursor.fetchone()
-            for detail in book_details:
-                return {
-                    'id': detail[0],
-                    'name': detail[1],
-                    'description': detail[2],
-                    'author_id': detail[3],
-                    'price': detail[4],
-                    'image': detail[5],
-                    'discount_percentage': detail[6],
-                    'pages_count': detail[7],
-                    'publisher_id': detail[8],
-                    'category_id': detail[9],
-                    'translator_id': detail[10],
-                    'publish_date': detail[11]
-                }
+            book_dict = {
+                'id': book_details[0],
+                'name': book_details[1],
+                'description': book_details[2],
+                'author_id': book_details[3],
+                'price': book_details[4],
+                'image': book_details[5],
+                'discount_percentage': book_details[6],
+                'pages_count': book_details[7],
+                'publisher_id': book_details[8],
+                'category_id': book_details[9],
+                'translator_id': book_details[10],
+                'publish_date': book_details[11]
+            }
         except db.Error as error:
-            return []
+            return book_dict
+        return book_dict
 
     def get_all(self) -> List:
         """ Get all of books and return as a List """
@@ -127,12 +131,10 @@ class Book:
         query = f"SELECT count(*) FROM {self.table_name}"
         db.cursor.execute(query)
         count = db.cursor.fetchone()[0]
-        db.disconnect()
         return int(count)
 
     def exist(self, book_id: int) -> bool:
         query = f"SELECT COUNT (*) FROM {self.table_name} WHERE id=%s"
         db.cursor.execute(query, (book_id,))
         count = db.cursor.fetchone()[0]
-        db.disconnect()
         return int(count) > 0

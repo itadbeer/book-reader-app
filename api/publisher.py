@@ -1,5 +1,5 @@
 import db
-from typing import List, Any
+from typing import List, Any, Dict
 
 
 class Publisher:
@@ -42,6 +42,17 @@ class Publisher:
         query = f"DELETE FROM {self.table_name} WHERE id=%s"
         db.cursor.execute(query, (publisher_id,))
         return True
+
+    def get(self, publisher_id:int) -> Dict:
+        publisher_dict = {}
+        query = f"SELECT * FROM {self.table_name} WHERE id=%s"
+        try:
+            db.cursor.execute(query,(publisher_id,))
+            publisher: List[Any] = db.cursor.fetchone()
+        except db.Error as error:
+            return publisher_dict
+        publisher_dict = {'id': publisher[0], 'name': publisher[1], 'description': publisher[2]}
+        return publisher_dict
 
     def get_all(self) -> List:
         """ Get all of categories and return as a List """
