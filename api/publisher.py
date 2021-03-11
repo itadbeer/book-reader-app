@@ -33,7 +33,8 @@ class Publisher:
     def update(self, publisher_id: int, publisher_name: str, publisher_description: str) -> bool:
         query = f"UPDATE {self.table_name} SET name=%s,description=%s WHERE id=%s"
         try:
-            db.cursor.execute(query, (publisher_name, publisher_description, publisher_id))
+            db.cursor.execute(
+                query, (publisher_name, publisher_description, publisher_id))
             return True
         except db.Error as error:
             return False
@@ -43,15 +44,17 @@ class Publisher:
         db.cursor.execute(query, (publisher_id,))
         return True
 
-    def get(self, publisher_id:int) -> Dict:
+    def get(self, publisher_id: int) -> Dict:
         publisher_dict = {}
         query = f"SELECT * FROM {self.table_name} WHERE id=%s"
         try:
-            db.cursor.execute(query,(publisher_id,))
+            db.cursor.execute(query, (publisher_id,))
             publisher: List[Any] = db.cursor.fetchone()
         except db.Error as error:
             return publisher_dict
-        publisher_dict = {'id': publisher[0], 'name': publisher[1], 'description': publisher[2]}
+        publisher_dict = {
+            'id': publisher[0], 'name': publisher[1], 'description': publisher[2]
+        }
         return publisher_dict
 
     def get_all(self) -> List:
@@ -74,12 +77,10 @@ class Publisher:
         query = f"SELECT count(*) FROM {self.table_name}"
         db.cursor.execute(query)
         count = db.cursor.fetchone()[0]
-        db.disconnect()
         return int(count)
 
     def exist(self, publisher_id: int) -> bool:
         query = f"SELECT COUNT (*) FROM {self.table_name} WHERE id=%s"
         db.cursor.execute(query, (publisher_id,))
         count = db.cursor.fetchone()[0]
-        db.disconnect()
         return int(count) > 0

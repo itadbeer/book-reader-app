@@ -30,7 +30,7 @@ if __name__ == "__main__":
                 request_version = request.headers.get('api_version')
                 return view_function(*args, **kwargs)
             else:
-                abort(404)
+                abort(406)
         return decorated_function
 
     app = Flask(__name__)
@@ -199,7 +199,7 @@ if __name__ == "__main__":
             else:
                 name = request.values.get('name')
                 if len(name) > 0:
-                    return jsonify(result=category.add(name))
+                    return jsonify(result=category.update(category_id, name))
                 else:
                     abort(404)
 
@@ -254,7 +254,7 @@ if __name__ == "__main__":
                 name = request.values.get('name')
                 description = request.values.get('description')
                 if len(name) > 0:
-                    return jsonify(result=publisher.add(name, description))
+                    return jsonify(result=publisher.update(publisher_id, name, description))
                 else:
                     abort(404)
 
@@ -273,7 +273,7 @@ if __name__ == "__main__":
     @require_authentication
     def get_publisher(publisher_id):
         if request_version == "1.0":
-            if category.exist(publisher_id):
+            if publisher.exist(publisher_id):
                 return jsonify(result=publisher.get(publisher_id))
             else:
                 abort(404)
@@ -309,9 +309,9 @@ if __name__ == "__main__":
                 name = request.values.get('name')
                 description = request.values.get('description')
                 if len(name) > 0:
-                    return jsonify(result=author.add(name, description))
+                    return jsonify(result=author.update(author_id, name, description))
                 else:
-                    abort(404)
+                    abort(400)
 
     @app.route('/author/delete/<author_id>', methods=['DELETE'])
     @versioning
@@ -328,7 +328,7 @@ if __name__ == "__main__":
     @require_authentication
     def get_author(author_id):
         if request_version == "1.0":
-            if category.exist(author_id):
+            if author.exist(author_id):
                 return jsonify(result=author.get(author_id))
             else:
                 abort(404)
@@ -364,9 +364,9 @@ if __name__ == "__main__":
                 name = request.values.get('name')
                 description = request.values.get('description')
                 if len(name) > 0:
-                    return jsonify(result=translator.add(name, description))
+                    return jsonify(result=translator.update(translator_id, name, description))
                 else:
-                    abort(404)
+                    abort(400)
 
     @app.route('/translator/delete/<translator_id>', methods=['DELETE'])
     @versioning
@@ -383,7 +383,7 @@ if __name__ == "__main__":
     @require_authentication
     def get_translator(translator_id):
         if request_version == "1.0":
-            if category.exist(translator_id):
+            if translator.exist(translator_id):
                 return jsonify(result=translator.get(translator_id))
             else:
                 abort(404)

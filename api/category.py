@@ -43,18 +43,17 @@ class Category:
         except db.Error as error:
             return False
 
-    def get(self, category_id) -> Dict:
+    def get(self, category_id: int) -> Dict:
         query = f"SELECT * FROM {self.table_name} WHERE id=%s"
         category_dict = {}
         try:
-            db.cursor.execute(query,(category_id,))
-            category: List[Any] = db.cursor.fetchall()
+            db.cursor.execute(query, (category_id,))
+            category: List[Any] = db.cursor.fetchone()
         except db.Error:
             return category_dict
-        for details in category:
-            category_dict = {
-                'id': details[0], 'name': details[1]
-            }
+        category_dict = {
+            'id': category[0], 'name': category[1]
+        }
         return category_dict
 
     def get_all(self) -> List:
@@ -77,12 +76,10 @@ class Category:
         query = f"SELECT count(*) FROM {self.table_name}"
         db.cursor.execute(query)
         count = db.cursor.fetchone()[0]
-        db.disconnect()
         return int(count)
 
     def exist(self, category_id: int) -> bool:
         query = f"SELECT COUNT (*) FROM {self.table_name} WHERE id=%s"
         db.cursor.execute(query, (category_id,))
         count = db.cursor.fetchone()[0]
-        db.disconnect()
         return int(count) > 0
