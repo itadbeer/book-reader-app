@@ -8,6 +8,7 @@ class Discovery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: MyAppBar(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -18,10 +19,10 @@ class Discovery extends StatelessWidget {
                 SearchBar(),
                 CardsSection(title: "محبوب ترین ها"),
                 CardsSection(title: "آخرین ها"),
-                MyFloatingNavigationBar()
               ],
             )),
       ),
+      bottomNavigationBar: MyFloatingNavigationBar(),
     );
   }
 }
