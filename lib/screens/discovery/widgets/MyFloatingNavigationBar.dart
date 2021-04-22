@@ -1,5 +1,7 @@
 import 'package:ibr/ibr.dart';
 
+int current_index = 0;
+
 class MyFloatingNavigationBar extends StatelessWidget {
   const MyFloatingNavigationBar({
     Key key,
@@ -16,15 +18,25 @@ class MyFloatingNavigationBar extends StatelessWidget {
         child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(16.0)),
             child: BottomNavigationBar(
-              currentIndex: 0,
               elevation: 0,
+              currentIndex: current_index,
               backgroundColor: surface,
               selectedItemColor: myTheme.primaryColor,
               unselectedItemColor: onSurface,
               selectedFontSize: 12,
               unselectedFontSize: 12,
-              onTap: (value) {
-                // Respond to item press.
+              onTap: (newIndex) {
+                current_index = newIndex;
+                switch (current_index) {
+                  case 0:
+                    Navigator.pushReplacementNamed(context, '/');
+                    break;
+                  case 1:
+                    Navigator.pushReplacementNamed(context, '/categories');
+                    break;
+                  default:
+                    Navigator.pushReplacementNamed(context, '/');
+                }
               },
               items: [
                 BottomNavigationBarItem(

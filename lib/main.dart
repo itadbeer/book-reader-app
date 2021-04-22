@@ -20,7 +20,11 @@ class MyApp extends StatelessWidget {
       locale: Locale("fa", "IR"),
       title: 'کتابخوان اسلامی',
       theme: myTheme,
-      home: Discovery(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Discovery(),
+        '/categories': (context) => Categories(),
+      },
     );
   }
 }
