@@ -16,8 +16,8 @@ book reader application
 - [ ] licenses
 
 ## Project definition
-## UX design
-## UI design
+## UX & UI design
+You can access the UI stuff with this [link to Adobe XD](https://xd.adobe.com/view/4e9d767b-7ef7-4a01-b4fb-5069141f3d5c-1bce/).
 ## Front-end development
 ### Initialize Project Structure
 ### Design system
