@@ -1,7 +1,5 @@
 import 'package:ibr/ibr.dart';
-import 'package:ibr/screens/discovery/widgets/MyAppBar.dart';
 import 'package:ibr/screens/discovery/widgets/CardsSection.dart';
-import 'package:ibr/screens/discovery/widgets/MyFloatingNavigationBar.dart';
 import 'package:ibr/screens/discovery/widgets/SearchBar.dart';
 
 class Discovery extends StatelessWidget {
