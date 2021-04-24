@@ -224,15 +224,17 @@ class FooterPurchaseBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 10, bottom: 10, left: 16, right: 16),
+      padding: EdgeInsets.only(left: 16, right: 16),
       height: 56,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: onPrimaryHighEmphasis,
-        border: Border.all(color: onSurfaceBorder, width: 1),
+        border: Border(top: BorderSide(color: onSurfaceBorder, width: 1)),
       ),
       child: Row(children: [
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Row(
               children: [
@@ -278,24 +280,27 @@ class FooterPurchaseBar extends StatelessWidget {
           ],
         ),
         Spacer(),
-        Column(children: [
-          Align(
-            alignment: Alignment.centerRight,
-            child: Container(
-              width: 96,
-              height: 36,
-              decoration: BoxDecoration(
-                  color: myTheme.primaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(8.0))),
-              child: Center(
-                child: Text(
-                  "خرید",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+        Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  width: 96,
+                  height: 36,
+                  decoration: BoxDecoration(
+                      color: myTheme.primaryColor,
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: Center(
+                    child: Text(
+                      "خرید",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-        ]),
+            ]),
       ]),
     );
   }
