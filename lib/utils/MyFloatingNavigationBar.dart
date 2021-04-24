@@ -12,7 +12,7 @@ class MyFloatingNavigationBar extends StatelessWidget {
     return Container(
         margin: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          border: Border.all(color: onSurface, width: 1),
+          border: Border.all(color: onSurfaceBorder, width: 1),
           borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         child: ClipRRect(
@@ -20,7 +20,7 @@ class MyFloatingNavigationBar extends StatelessWidget {
             child: BottomNavigationBar(
               elevation: 0,
               currentIndex: current_index,
-              backgroundColor: surface,
+              backgroundColor: onPrimaryHighEmphasis,
               selectedItemColor: myTheme.primaryColor,
               unselectedItemColor: onSurface,
               selectedFontSize: 12,

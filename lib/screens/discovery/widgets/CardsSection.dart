@@ -1,6 +1,6 @@
 import 'package:ibr/ibr.dart';
 
-Container buildProductCard() {
+Container buildProductCard(BuildContext context) {
   return Container(
     width: 150,
     margin: EdgeInsets.only(left: 8, top: 16),
@@ -15,14 +15,16 @@ Container buildProductCard() {
           ),
           child: Column(
             children: <Widget>[
-              Container(
+              GestureDetector(
+                onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
                 child: Image.network(
                   'https://edrisranjbar.ir/wp-content/uploads/2021/04/book.png',
                   height: 200,
                   width: 150,
                 ),
               ),
-              Container(
+              GestureDetector(
+                onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
                 child: Text("ترجمه لغات و اصطلاحات کل سلسله العربیة بین یدیک",
                     style: TextStyle(fontSize: 14, color: Colors.black)),
               ),
@@ -46,7 +48,9 @@ Container buildProductCard() {
                                 child: new Text(
                                   "75%",
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 14),
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500),
                                   textAlign: TextAlign.center,
                                 ),
                               )),
@@ -72,7 +76,8 @@ Container buildProductCard() {
                                     text: "11,250",
                                     style: TextStyle(
                                         color: myTheme.primaryColor,
-                                        fontSize: 14))),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500))),
                             Text(" تومان",
                                 style: TextStyle(
                                     color: onSurfaceMediumEmphasis,
@@ -103,9 +108,9 @@ class CardsSection extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
-            buildProductCard(),
-            buildProductCard(),
-            buildProductCard()
+            buildProductCard(context),
+            buildProductCard(context),
+            buildProductCard(context)
           ],
         ),
       )

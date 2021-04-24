@@ -1,6 +1,6 @@
 import 'package:ibr/ibr.dart';
-import 'package:ibr/screens/discovery/widgets/CardsSection.dart';
-import 'package:ibr/screens/discovery/widgets/SearchBar.dart';
+import 'package:ibr/screens/discovery/widgets/cardsSection.dart';
+import 'package:ibr/screens/discovery/widgets/searchBar.dart';
 
 class Discovery extends StatelessWidget {
   @override

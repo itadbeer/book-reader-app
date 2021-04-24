@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+final onPrimaryHighEmphasis = Colors.white;
 final onSurfaceHighEmphasis = Color.fromRGBO(0, 0, 0, 0.88);
 final onSurface = Color.fromRGBO(0, 0, 0, 0.64);
+final onSurfaceBorder = Color.fromRGBO(0, 0, 0, 0.12);
 final onSurfaceMediumEmphasis = Color.fromRGBO(0, 0, 0, 0.64);
 final surface = Color.fromRGBO(255, 255, 255, 1);
 final ThemeData myTheme = ThemeData(
