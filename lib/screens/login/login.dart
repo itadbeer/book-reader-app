@@ -22,7 +22,7 @@ class Login extends StatelessWidget {
                   ),
                 )
               ]),
-              TextBox(),
+              MyTextBox(),
               Container(
                   width: MediaQuery.of(context).size.width - 32,
                   height: 40,
@@ -54,16 +54,16 @@ class Login extends StatelessWidget {
   }
 }
 
-class TextBox extends StatefulWidget {
-  const TextBox({
+class MyTextBox extends StatefulWidget {
+  const MyTextBox({
     Key key,
   }) : super(key: key);
 
   @override
-  _TextBoxState createState() => _TextBoxState();
+  _MyTextBoxState createState() => _MyTextBoxState();
 }
 
-class _TextBoxState extends State<TextBox> {
+class _MyTextBoxState extends State<MyTextBox> {
   FocusNode _mobileFocusNode;
 
   @override
