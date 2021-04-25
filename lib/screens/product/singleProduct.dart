@@ -192,26 +192,55 @@ class SingleProduct extends StatelessWidget {
 }
 
 class SimpleTopBar extends StatelessWidget implements PreferredSizeWidget {
-  const SimpleTopBar({
-    Key key,
-  }) : super(key: key);
+  final String title;
+  final Color bgColor;
+  const SimpleTopBar({Key key, this.title, this.bgColor});
   @override
   Size get preferredSize => new Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topRight,
-      child: Container(
-          height: 56,
-          color: Colors.transparent,
-          child: GestureDetector(
-            child: IconButton(
-                padding: EdgeInsets.fromLTRB(0, 18, 22, 18),
-                icon: Icon(Icons.arrow_back_ios),
-                onPressed: () {
-                  Navigator.pop(context);
-                }),
-          )),
+    return Wrap(
+      children: [
+        Align(
+          alignment: Alignment.topRight,
+          child: Container(
+              height: 56,
+              color: bgColor ?? Colors.transparent,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(right: 22.23),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          child: IconButton(
+                              hoverColor: Colors.transparent,
+                              splashColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              padding: EdgeInsets.fromLTRB(0, 18, 22, 18),
+                              icon: Icon(Icons.arrow_back_ios),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              }),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(this.title ?? "",
+                            style: TextStyle(
+                                color: onSurfaceHighEmphasis,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500))
+                      ])
+                ],
+              )),
+        ),
+      ],
     );
   }
 }
