@@ -8,25 +8,37 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => new Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      backgroundColor: Colors.white,
-      titleSpacing: 0.0,
-      elevation: 0,
-      title: Container(
-        margin: EdgeInsets.only(right: 16),
-        child: Text('کتاب خوان',
-            style: TextStyle(color: onSurfaceHighEmphasis, fontSize: 20)),
-      ),
-      actions: [
-        Container(
-          margin: EdgeInsets.only(left: 16),
-          child: TextButton(
-              child: Text('ورود به حساب',
-                  style: TextStyle(color: myTheme.primaryColor, fontSize: 16)),
-              onPressed: () {}),
-        )
-      ],
-    );
+    return Container(
+        height: 56,
+        color: onPrimaryHighEmphasis,
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('کتاب خوان',
+                    style: TextStyle(
+                        color: onSurfaceHighEmphasis,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500)),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                GestureDetector(
+                    child: Text('ورود به حساب',
+                        style: TextStyle(
+                            color: myTheme.primaryColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.normal)),
+                    onTap: () {}),
+              ],
+            )
+          ],
+        ));
   }
 }
