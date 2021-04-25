@@ -5,7 +5,9 @@ final onSurfaceHighEmphasis = Color.fromRGBO(0, 0, 0, 0.88);
 final onSurface = Color.fromRGBO(0, 0, 0, 0.64);
 final onSurfaceBorder = Color.fromRGBO(0, 0, 0, 0.12);
 final onSurfaceMediumEmphasis = Color.fromRGBO(0, 0, 0, 0.64);
+final onSurfaceDisabled = Color.fromRGBO(0, 0, 0, 0.4);
 final surface = Color.fromRGBO(255, 255, 255, 1);
+final primaryLightVariant = Color.fromRGBO(79, 179, 191, 1);
 final ThemeData myTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: Color(0xFF00838F),
