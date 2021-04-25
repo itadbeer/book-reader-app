@@ -35,7 +35,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
                             color: myTheme.primaryColor,
                             fontSize: 16,
                             fontWeight: FontWeight.normal)),
-                    onTap: () {}),
+                    onTap: () {
+                      Navigator.pushNamed(context, '/login');
+                    }),
               ],
             )
           ],

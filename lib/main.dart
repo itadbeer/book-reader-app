@@ -23,8 +23,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Discovery(),
-        '/singleProduct': (context)=> SingleProduct(),
+        '/singleProduct': (context) => SingleProduct(),
         '/categories': (context) => Categories(),
+        '/login': (context) => Login(),
       },
     );
   }
