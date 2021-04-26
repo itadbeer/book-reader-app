@@ -7,7 +7,11 @@ export 'package:ibr/screens/product/singleProduct.dart';
 export 'package:ibr/screens/login/login.dart';
 export 'package:ibr/screens/login/codeVerification.dart';
 export 'package:ibr/screens/account/account.dart';
+
+//  Utilities
 export 'package:ibr/utils/theme.dart';
 export 'package:ibr/utils/myAppBar.dart';
 export 'package:ibr/utils/myFloatingNavigationBar.dart';
+export 'package:ibr/utils/option.dart';
+
 export 'package:flutter_localizations/flutter_localizations.dart';
