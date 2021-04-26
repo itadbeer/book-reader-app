@@ -31,7 +31,9 @@ class Login extends StatelessWidget {
                       color: onSurfaceBorder,
                       borderRadius: BorderRadius.circular(8)),
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/codeVerification');
+                      },
                       child: Container(
                           child: Center(
                               child: Text(
