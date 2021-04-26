@@ -22,7 +22,7 @@ class Login extends StatelessWidget {
                   ),
                 )
               ]),
-              MyTextBox(caption: "شمارۀ همراه"),
+              MyTextBox(caption: "شمارۀ همراه", placeholder: "09-- --- ----"),
               Container(
                   width: MediaQuery.of(context).size.width - 32,
                   height: 40,
@@ -56,7 +56,8 @@ class Login extends StatelessWidget {
 
 class MyTextBox extends StatefulWidget {
   final String caption;
-  const MyTextBox({Key key, this.caption}) : super(key: key);
+  final String placeholder;
+  const MyTextBox({Key key, this.caption, this.placeholder}) : super(key: key);
 
   @override
   _MyTextBoxState createState() => _MyTextBoxState();
@@ -125,7 +126,7 @@ class _MyTextBoxState extends State<MyTextBox> {
                   disabledBorder: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(16)),
-                  hintText: '09-- --- ----',
+                  hintText: widget.placeholder ?? "",
                 ),
               ),
             ),
