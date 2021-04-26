@@ -9,6 +9,9 @@ final onSurfaceDisabled = Color.fromRGBO(0, 0, 0, 0.4);
 final surface = Color.fromRGBO(255, 255, 255, 1);
 final primaryLightVariant = Color.fromRGBO(79, 179, 191, 1);
 final ThemeData myTheme = ThemeData(
+  splashColor: Colors.transparent,
+  highlightColor: Colors.transparent,
+  hoverColor: Colors.transparent,
   brightness: Brightness.light,
   primaryColor: Color(0xFF00838F),
   primaryColorBrightness: Brightness.light,
