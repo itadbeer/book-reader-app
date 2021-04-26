@@ -1,4 +1,5 @@
 import 'package:ibr/ibr.dart';
+import 'package:ibr/screens/account/widgets/logoutDialog.dart';
 
 class Account extends StatelessWidget {
   @override
@@ -28,8 +29,16 @@ class Account extends StatelessWidget {
                       Option(
                         padding: EdgeInsets.all(16),
                         children: [
-                          Text("خروج از حساب",
-                              style: TextStyle(color: error, fontSize: 16))
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      LogoutDialog());
+                            },
+                            child: Text("خروج از حساب",
+                                style: TextStyle(color: error, fontSize: 16)),
+                          )
                         ],
                       )
                     ],
