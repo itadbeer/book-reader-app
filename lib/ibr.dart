@@ -6,6 +6,7 @@ export 'package:ibr/screens/categories/categories.dart';
 export 'package:ibr/screens/product/singleProduct.dart';
 export 'package:ibr/screens/login/login.dart';
 export 'package:ibr/screens/login/codeVerification.dart';
+export 'package:ibr/screens/account/account.dart';
 export 'package:ibr/utils/theme.dart';
 export 'package:ibr/utils/myAppBar.dart';
 export 'package:ibr/utils/myFloatingNavigationBar.dart';

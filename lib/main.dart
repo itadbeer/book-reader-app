@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/categories': (context) => Categories(),
         '/login': (context) => Login(),
         '/codeVerification': (context) => CodeVerification(),
+        '/account': (context) => Account(),
       },
     );
   }
