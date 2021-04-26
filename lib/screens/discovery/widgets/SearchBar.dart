@@ -7,23 +7,42 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _searchController = TextEditingController();
     return Container(
+        width: MediaQuery.of(context).size.width - 32,
         child: TextField(
-      decoration: InputDecoration(
-          contentPadding: EdgeInsets.fromLTRB(27, 19, 27, 19),
-          filled: true,
-          fillColor: Color.fromRGBO(0, 0, 0, 0.04),
-          enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(16)),
-          border: OutlineInputBorder(
-              borderSide: BorderSide.none,
-              borderRadius: BorderRadius.circular(16)),
-          hintText: 'جست و جو',
-          prefixIcon: Icon(
-            Icons.search,
-            color: Color.fromRGBO(0, 0, 0, 0.4),
-          )),
-    ));
+            controller: _searchController,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Color.fromRGBO(0, 0, 0, 0.04),
+              labelStyle: TextStyle(color: onSurfaceHighEmphasis, fontSize: 16),
+              hintStyle: TextStyle(color: onSurfaceDisabled, fontSize: 16),
+              enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(16)),
+              border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(16)),
+              hintText: 'جست و جو',
+              prefixIcon: Padding(
+                padding: const EdgeInsets.only(right: 27, left: 19),
+                child: Icon(
+                  Icons.search,
+                  color: onSurfaceDisabled,
+                ),
+              ),
+              prefixIconConstraints:
+                  BoxConstraints(minHeight: 24, minWidth: 24),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.all(21),
+                child: IconButton(
+                  onPressed: () => _searchController.clear(),
+                  icon: Icon(
+                    Icons.clear,
+                    color: onSurfaceMediumEmphasis,
+                  ),
+                ),
+              ),
+            )));
   }
 }
