@@ -10,6 +10,8 @@ class MyFloatingNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        // it should be 56, but two pixels for the borders
+        height: 58,
         margin: EdgeInsets.all(16),
         decoration: BoxDecoration(
           border: Border.all(color: onSurfaceBorder, width: 1),
