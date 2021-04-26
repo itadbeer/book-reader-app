@@ -22,7 +22,7 @@ class Login extends StatelessWidget {
                   ),
                 )
               ]),
-              MyTextBox(),
+              MyTextBox(caption: "شمارۀ همراه"),
               Container(
                   width: MediaQuery.of(context).size.width - 32,
                   height: 40,
@@ -55,9 +55,8 @@ class Login extends StatelessWidget {
 }
 
 class MyTextBox extends StatefulWidget {
-  const MyTextBox({
-    Key key,
-  }) : super(key: key);
+  final String caption;
+  const MyTextBox({Key key, this.caption}) : super(key: key);
 
   @override
   _MyTextBoxState createState() => _MyTextBoxState();
@@ -92,7 +91,7 @@ class _MyTextBoxState extends State<MyTextBox> {
           children: [
             Container(
                 margin: EdgeInsets.only(top: 24),
-                child: Text("شمارۀ همراه",
+                child: Text(widget.caption,
                     style: TextStyle(
                         color: _mobileFocusNode.hasFocus
                             ? myTheme.primaryColor
