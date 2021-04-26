@@ -8,6 +8,7 @@ final onSurfaceMediumEmphasis = Color.fromRGBO(0, 0, 0, 0.64);
 final onSurfaceDisabled = Color.fromRGBO(0, 0, 0, 0.4);
 final surface = Color.fromRGBO(255, 255, 255, 1);
 final primaryLightVariant = Color.fromRGBO(79, 179, 191, 1);
+final error = Color.fromRGBO(243, 26, 63, 1);
 final ThemeData myTheme = ThemeData(
   splashColor: Colors.transparent,
   highlightColor: Colors.transparent,
