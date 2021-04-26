@@ -216,9 +216,6 @@ class SimpleTopBar extends StatelessWidget implements PreferredSizeWidget {
                       children: [
                         GestureDetector(
                           child: IconButton(
-                              hoverColor: Colors.transparent,
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
                               padding: EdgeInsets.fromLTRB(0, 18, 22, 18),
                               icon: Icon(Icons.arrow_back_ios),
                               onPressed: () {
