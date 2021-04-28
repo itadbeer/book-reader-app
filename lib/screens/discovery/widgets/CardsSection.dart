@@ -17,8 +17,9 @@ Container buildProductCard(BuildContext context) {
             children: <Widget>[
               GestureDetector(
                 onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
-                child: Image.network(
-                  'https://edrisranjbar.ir/wp-content/uploads/2021/04/book.png',
+                child: CachedNetworkImage(
+                  imageUrl:
+                      'https://edrisranjbar.ir/wp-content/uploads/2021/04/book.png',
                   height: 200,
                   width: 150,
                 ),

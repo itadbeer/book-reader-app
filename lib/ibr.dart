@@ -1,6 +1,7 @@
 library ibr;
 
 export 'package:flutter/material.dart';
+export 'package:cached_network_image/cached_network_image.dart';
 export 'package:ibr/screens/discovery/discovery.dart';
 export 'package:ibr/screens/categories/categories.dart';
 export 'package:ibr/screens/product/singleProduct.dart';
