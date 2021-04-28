@@ -17,7 +17,7 @@ class Discovery extends StatelessWidget {
                 SearchBar(),
                 CardsSection(title: "محبوب ترین ها"),
                 CardsSection(title: "آخرین ها"),
-                SizedBox(height: 72)
+                SizedBox(height: 88)
               ],
             )),
       ),
