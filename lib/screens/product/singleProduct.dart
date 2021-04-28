@@ -216,8 +216,8 @@ class SimpleTopBar extends StatelessWidget implements PreferredSizeWidget {
                       children: [
                         GestureDetector(
                           child: IconButton(
-                              padding: EdgeInsets.fromLTRB(0, 18, 22, 18),
-                              icon: Icon(Icons.arrow_back_ios),
+                              padding: EdgeInsets.all(16),
+                              icon: Icon(Icons.arrow_back_ios, size: 24),
                               onPressed: () {
                                 Navigator.pop(context);
                               }),
