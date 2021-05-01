@@ -8,9 +8,12 @@ class Discovery extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       appBar: TopBar(
-          title: "کتاب خوان",
-          displayGoBackButton: false,
-          displayActionButton: true),
+        title: "کتاب خوان",
+        displayGoBackButton: false,
+        displayActionButton: true,
+        actionButtonText: 'ورود به حساب',
+        actionButtonLink: '/login',
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(

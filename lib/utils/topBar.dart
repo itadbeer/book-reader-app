@@ -5,12 +5,16 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
   final Color bgColor;
   final bool displayGoBackButton;
   final bool displayActionButton;
+  final String actionButtonText;
+  final String actionButtonLink;
   const TopBar(
       {Key key,
       this.title,
       this.bgColor,
       this.displayGoBackButton,
-      this.displayActionButton});
+      this.displayActionButton,
+      this.actionButtonText,
+      this.actionButtonLink});
   @override
   Size get preferredSize => new Size.fromHeight(kToolbarHeight);
   @override
@@ -47,13 +51,13 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               GestureDetector(
-                  child: Text('ورود به حساب',
+                  child: Text(this.actionButtonText,
                       style: TextStyle(
                           color: myTheme.primaryColor,
                           fontSize: 16,
                           fontWeight: FontWeight.normal)),
                   onTap: () {
-                    Navigator.pushNamed(context, '/login');
+                    Navigator.pushNamed(context, this.actionButtonLink);
                   }),
             ],
           )
