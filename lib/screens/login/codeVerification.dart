@@ -5,10 +5,11 @@ class CodeVerification extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBody: true,
-        appBar: SimpleTopBar(
+        appBar: TopBar(
             title: "تایید شمارۀ همراه",
             bgColor: onPrimaryHighEmphasis,
-            displayGoBackButton: true),
+            displayGoBackButton: true,
+            displayActionButton: false),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(

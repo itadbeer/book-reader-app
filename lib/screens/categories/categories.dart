@@ -5,7 +5,10 @@ class Categories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: SimpleTopBar(title: "دسته‌بندی‌ها", displayGoBackButton: false),
+      appBar: TopBar(
+          title: "دسته‌بندی‌ها",
+          displayGoBackButton: false,
+          displayActionButton: false),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(

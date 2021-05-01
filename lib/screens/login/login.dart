@@ -5,10 +5,12 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBody: true,
-        appBar: SimpleTopBar(
-            title: "ورود به حساب کاربری",
-            bgColor: onPrimaryHighEmphasis,
-            displayGoBackButton: true),
+        appBar: TopBar(
+          title: "ورود به حساب کاربری",
+          bgColor: onPrimaryHighEmphasis,
+          displayGoBackButton: true,
+          displayActionButton: false,
+        ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(

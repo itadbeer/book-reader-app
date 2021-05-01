@@ -7,7 +7,10 @@ class Discovery extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: MyAppBar(),
+      appBar: TopBar(
+          title: "کتاب خوان",
+          displayGoBackButton: false,
+          displayActionButton: true),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
