@@ -149,15 +149,35 @@ class SingleProduct extends StatelessWidget {
                       Text("دسته بندی ها: ",
                           style: TextStyle(
                               color: onSurfaceMediumEmphasis, fontSize: 16)),
-                      Text("دسته بندی",
-                          style: TextStyle(
-                              color: myTheme.primaryColor, fontSize: 16)),
+                      TextButton(
+                        style: ButtonStyle(
+                            overlayColor: MaterialStateColor.resolveWith(
+                                (states) => Colors.transparent)),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/category');
+                        },
+                        child: Text("دسته بندی",
+                            style: TextStyle(
+                                color: myTheme.primaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal)),
+                      ),
                       Text("، ",
                           style: TextStyle(
                               color: onSurfaceMediumEmphasis, fontSize: 16)),
-                      Text("دسته بندی",
-                          style: TextStyle(
-                              color: myTheme.primaryColor, fontSize: 16)),
+                      TextButton(
+                        style: ButtonStyle(
+                            overlayColor: MaterialStateColor.resolveWith(
+                                (states) => Colors.transparent)),
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/category');
+                        },
+                        child: Text("دسته بندی",
+                            style: TextStyle(
+                                color: myTheme.primaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.normal)),
+                      ),
                     ],
                   ),
                 ],
