@@ -6,8 +6,10 @@ class Account extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBody: true,
-        appBar:
-            SimpleTopBar(title: "حساب کاربری", bgColor: onPrimaryHighEmphasis),
+        appBar: SimpleTopBar(
+            title: "حساب کاربری",
+            bgColor: onPrimaryHighEmphasis,
+            displayGoBackButton: true),
         body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Container(

@@ -1,4 +1,5 @@
 import 'package:ibr/ibr.dart';
+import 'package:ibr/screens/product/widgets/footerPurchaseBar.dart';
 
 class SingleProduct extends StatelessWidget {
   @override
@@ -6,7 +7,7 @@ class SingleProduct extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      appBar: SimpleTopBar(),
+      appBar: SimpleTopBar(displayGoBackButton: true),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
@@ -194,140 +195,54 @@ class SingleProduct extends StatelessWidget {
 class SimpleTopBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Color bgColor;
-  const SimpleTopBar({Key key, this.title, this.bgColor});
+  final bool displayGoBackButton;
+  const SimpleTopBar(
+      {Key key, this.title, this.bgColor, this.displayGoBackButton});
   @override
   Size get preferredSize => new Size.fromHeight(kToolbarHeight);
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children: [
-        Align(
-          alignment: Alignment.topRight,
-          child: Container(
-              height: 56,
-              color: bgColor ?? Colors.transparent,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 22.23),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          child: IconButton(
-                              padding: EdgeInsets.all(16),
-                              icon: Icon(Icons.arrow_back_ios, size: 24),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              }),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(this.title ?? "",
-                            style: TextStyle(
-                                color: onSurfaceHighEmphasis,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500))
-                      ])
-                ],
-              )),
-        ),
-      ],
+    return Align(
+      alignment: Alignment.topRight,
+      child: Container(
+          padding: EdgeInsets.only(left: 16, right: 16),
+          height: 56,
+          color: bgColor ?? Colors.transparent,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              buildGoBackButton(context),
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(this.title ?? "",
+                        style: TextStyle(
+                            color: onSurfaceHighEmphasis,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500))
+                  ])
+            ],
+          )),
     );
   }
-}
 
-class FooterPurchaseBar extends StatelessWidget {
-  const FooterPurchaseBar({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: 16, right: 16),
-      height: 56,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        color: onPrimaryHighEmphasis,
-        border: Border(top: BorderSide(color: onSurfaceBorder, width: 1)),
-      ),
-      child: Row(children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Row(
+  Container buildGoBackButton(BuildContext context) {
+    return this.displayGoBackButton
+        ? Container(
+            margin: EdgeInsets.only(left: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  margin: EdgeInsets.only(left: 8),
-                  width: 32,
-                  height: 22.0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: myTheme.primaryColor,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                    child: Center(
-                      child: Text(
-                        "75%",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  ),
+                GestureDetector(
+                  child: IconButton(
+                      icon: Icon(Icons.arrow_back_ios, size: 24),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }),
                 ),
-                Container(
-                  margin: EdgeInsets.only(right: 8, left: 8),
-                  child: Text("45,000",
-                      style: TextStyle(
-                          color: onSurfaceMediumEmphasis,
-                          decoration: TextDecoration.lineThrough,
-                          fontSize: 14)),
-                ),
-                RichText(
-                    text: TextSpan(
-                        text: "11,250",
-                        style: TextStyle(
-                            color: myTheme.primaryColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500))),
-                Text(" تومان",
-                    style:
-                        TextStyle(color: onSurfaceMediumEmphasis, fontSize: 12))
               ],
-            )
-          ],
-        ),
-        Spacer(),
-        Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  width: 96,
-                  height: 36,
-                  decoration: BoxDecoration(
-                      color: myTheme.primaryColor,
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  child: Center(
-                    child: Text(
-                      "خرید",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                ),
-              ),
-            ]),
-      ]),
-    );
+            ),
+          )
+        : Container();
   }
 }

@@ -6,7 +6,9 @@ class CodeVerification extends StatelessWidget {
     return Scaffold(
         extendBody: true,
         appBar: SimpleTopBar(
-            title: "تایید شمارۀ همراه", bgColor: onPrimaryHighEmphasis),
+            title: "تایید شمارۀ همراه",
+            bgColor: onPrimaryHighEmphasis,
+            displayGoBackButton: true),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Container(
