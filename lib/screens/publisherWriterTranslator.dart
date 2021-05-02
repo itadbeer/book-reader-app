@@ -1,7 +1,7 @@
 import 'package:ibr/ibr.dart';
 import 'package:ibr/screens/product/widgets/horizontalProductCard.dart';
 
-class Category extends StatelessWidget {
+class PublisherWriterTranslator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,6 +15,46 @@ class Category extends StatelessWidget {
           child: Container(
               padding: EdgeInsets.only(left: 16, right: 16, top: 16),
               child: Column(children: <Widget>[
+                Row(children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 16),
+                    child: Text(
+                      "درباره",
+                      style: TextStyle(
+                          color: onSurfaceHighEmphasis,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  )
+                ]),
+                Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width - 16,
+                      margin: EdgeInsets.only(bottom: 24),
+                      child: Text(
+                          "این یک متن مثلا طولانی دربارۀ این کتاب است به نظر متن زیبایی می‌آید امیدوارم از خواندن آن لذت ببرید من که قطعا نوشتنش را دوست دارم",
+                          style: TextStyle(
+                              color: onSurfaceMediumEmphasis,
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal)),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 16),
+                      child: Text(
+                        "کتاب‌ها",
+                        style: TextStyle(
+                            color: onSurfaceHighEmphasis,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    )
+                  ],
+                ),
                 Row(children: [
                   Expanded(
                     child: Container(

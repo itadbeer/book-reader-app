@@ -18,8 +18,7 @@ Container buildProductCard(BuildContext context) {
               GestureDetector(
                 onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
                 child: CachedNetworkImage(
-                  imageUrl:
-                      'https://edrisranjbar.ir/wp-content/uploads/2021/04/book.png',
+                  imageUrl: 'https://imgcdn.taaghche.com/frontCover/38729.jpg',
                   height: 200,
                   width: 150,
                 ),

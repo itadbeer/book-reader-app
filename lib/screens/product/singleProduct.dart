@@ -16,7 +16,7 @@ class SingleProduct extends StatelessWidget {
             children: [
               Container(
                 child: Image.network(
-                  'https://edrisranjbar.ir/wp-content/uploads/2021/04/book.png',
+                  'https://imgcdn.taaghche.com/frontCover/38729.jpg',
                   height: 288,
                   width: MediaQuery.of(context).size.width,
                 ),

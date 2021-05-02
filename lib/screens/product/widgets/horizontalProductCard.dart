@@ -2,16 +2,22 @@ import 'package:ibr/ibr.dart';
 
 class HorizontalProductCard extends StatelessWidget {
   final String name;
+  final String thumbnailUrl;
   final int discountAmount;
   final String price;
   final String finalPrice;
   const HorizontalProductCard(
-      {Key key, this.name, this.discountAmount, this.price, this.finalPrice})
+      {Key key,
+      this.name,
+      this.discountAmount,
+      this.price,
+      this.finalPrice,
+      this.thumbnailUrl})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: EdgeInsets.only(left: 16),
       height: 96,
       decoration: BoxDecoration(
         color: onPrimaryHighEmphasis,
@@ -22,14 +28,16 @@ class HorizontalProductCard extends StatelessWidget {
         children: [
           Column(children: [
             Container(
-              margin: EdgeInsets.only(left: 16),
+              padding: EdgeInsets.all(8),
+              width: 72,
+              height: 92.11,
               child: GestureDetector(
                 onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
-                child: CachedNetworkImage(
-                  imageUrl:
-                      'https://m.media-amazon.com/images/I/41gr3r3FSWL.jpg',
-                  height: 92.11,
-                  width: 72,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: CachedNetworkImage(
+                    imageUrl: this.thumbnailUrl,
+                  ),
                 ),
               ),
             ),
