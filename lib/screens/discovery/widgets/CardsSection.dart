@@ -15,12 +15,18 @@ Container buildProductCard(BuildContext context) {
           ),
           child: Column(
             children: <Widget>[
-              GestureDetector(
-                onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
-                child: CachedNetworkImage(
-                  imageUrl: 'https://imgcdn.taaghche.com/frontCover/38729.jpg',
-                  height: 200,
-                  width: 150,
+              Container(
+                padding: EdgeInsets.all(8),
+                child: GestureDetector(
+                  onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          'https://imgcdn.taaghche.com/frontCover/38729.jpg',
+                      height: 192,
+                    ),
+                  ),
                 ),
               ),
               GestureDetector(

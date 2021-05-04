@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => Login(),
         '/codeVerification': (context) => CodeVerification(),
         '/account': (context) => Account(),
+        '/library': (context) => Library(),
       },
     );
   }

@@ -38,7 +38,7 @@ class MyFloatingNavigationBar extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/categories');
                 break;
               default:
-                Navigator.pushReplacementNamed(context, '/');
+                Navigator.pushReplacementNamed(context, '/library');
             }
           },
           items: [
