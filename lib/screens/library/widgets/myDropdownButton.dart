@@ -11,19 +11,21 @@ class MyDropdownButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.fromLTRB(16, 13, 16, 13),
-        width: 128,
-        height: 48,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            color: onPrimaryHighEmphasis,
-            border: Border.all(color: onSurfaceBorder, width: 1)),
-        child: Text(text,
-            style: TextStyle(
-                color: onSurfaceMediumEmphasis,
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-                height: 1.5)));
+    return Material(
+      child: Container(
+          padding: EdgeInsets.fromLTRB(16, 13, 16, 13),
+          width: 128,
+          height: 48,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: onPrimaryHighEmphasis,
+              border: Border.all(color: onSurfaceBorder, width: 1)),
+          child: Text(text,
+              style: TextStyle(
+                  color: onSurfaceMediumEmphasis,
+                  fontSize: 14,
+                  fontWeight: FontWeight.normal,
+                  height: 1.5))),
+    );
   }
 }

@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:ibr/ibr.dart';
 import 'package:ibr/screens/library/widgets/myDropdownButton.dart';
+
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 class LibraryItem extends StatefulWidget {
   final String name;
@@ -13,8 +17,29 @@ class LibraryItem extends StatefulWidget {
   _LibraryItemState createState() => _LibraryItemState();
 }
 
-class _LibraryItemState extends State<LibraryItem> {
-  bool show_delete_confirmation = false;
+class _LibraryItemState extends State<LibraryItem> with RouteAware {
+  GlobalKey actionKey;
+  double height, width, xPosition, yPosition;
+  OverlayEntry floatingDropdown;
+  bool isDropdownOpened = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // routeObserver is the global variable we created before
+    routeObserver.subscribe(this, ModalRoute.of(context));
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPop() {
+    floatingDropdown.remove();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +93,7 @@ class _LibraryItemState extends State<LibraryItem> {
   }
 
   Row buildDownloadBar(DownloadStatus status) {
+    GlobalKey theButtonKey = GlobalKey();
     switch (status) {
       case DownloadStatus.normal:
         return Row(
@@ -88,45 +114,44 @@ class _LibraryItemState extends State<LibraryItem> {
           ],
         );
       case DownloadStatus.downloading:
-        return Row(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(left: 16),
-              child: Button(
-                padding: EdgeInsets.symmetric(vertical: 7),
-                backgroundColor: Colors.transparent,
-                textColor: myTheme.primaryColor,
-                text: "در حال دانلود...",
-              ),
+        return Row(children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(left: 16),
+            child: Button(
+              padding: EdgeInsets.symmetric(vertical: 7),
+              backgroundColor: Colors.transparent,
+              textColor: myTheme.primaryColor,
+              text: "در حال دانلود...",
             ),
-            Stack(clipBehavior: Clip.none, children: [
-              Container(
-                  child: Button(
-                onPressed: () {
-                  setState(() {
-                    show_delete_confirmation = !show_delete_confirmation;
-                  });
-                  print(show_delete_confirmation);
-                },
-                backgroundColor: error,
-                text: "لغو دانلود",
-                textColor: onPrimaryHighEmphasis,
-              )),
-              Positioned(
-                top: 40,
-                right: 0,
-                child: Visibility(
-                  visible: show_delete_confirmation,
-                  child: MyDropdownButton(
-                    backgroundColor: error,
-                    text: "لغو دانلود",
-                    textColor: onPrimaryHighEmphasis,
+          ),
+          PopupMenuButton(
+            offset: Offset.fromDirection(pi / 2, 40),
+            tooltip: "لغو دانلود",
+            child: Button(
+              key: theButtonKey,
+              backgroundColor: error,
+              text: "لغو دانلود",
+              textColor: onPrimaryHighEmphasis,
+            ),
+            // onSelected: handleClick,
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  height: 32,
+                  value: "لغو دانلود",
+                  child: Text(
+                    "لغو دانلود",
+                    style: TextStyle(
+                        color: onSurfaceMediumEmphasis,
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                        height: 1.5),
                   ),
                 ),
-              ),
-            ]),
-          ],
-        );
+              ];
+            },
+          ),
+        ]);
       case DownloadStatus.downloaded:
         return Row(
           children: <Widget>[
@@ -136,13 +161,33 @@ class _LibraryItemState extends State<LibraryItem> {
                 text: "خواندن",
               ),
             ),
-            Container(
-                child: Button(
-              padding: EdgeInsets.symmetric(vertical: 7),
-              backgroundColor: Colors.transparent,
-              text: "حذف دانلود",
-              textColor: error,
-            ))
+            PopupMenuButton(
+              offset: Offset.fromDirection(pi / 2, 40),
+              tooltip: "حذف دانلود",
+              child: Button(
+                padding: EdgeInsets.symmetric(vertical: 7),
+                backgroundColor: Colors.transparent,
+                text: "حذف دانلود",
+                textColor: error,
+              ),
+              // onSelected: handleClick,
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem(
+                    height: 32,
+                    value: "حذف دانلود",
+                    child: Text(
+                      "حذف دانلود",
+                      style: TextStyle(
+                          color: onSurfaceMediumEmphasis,
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                          height: 1.5),
+                    ),
+                  ),
+                ];
+              },
+            ),
           ],
         );
       default:
@@ -164,5 +209,35 @@ class _LibraryItemState extends State<LibraryItem> {
           ],
         );
     }
+  }
+
+  OverlayEntry createDropdown() {
+    return OverlayEntry(builder: (context) {
+      return Positioned(
+        top: yPosition + height + 4,
+        right: xPosition - width + 42,
+        child: MyDropdownButton(
+          backgroundColor: error,
+          text: "لغو دانلود",
+          textColor: onPrimaryHighEmphasis,
+        ),
+      );
+    });
+  }
+
+  void closeDropdown() {
+    floatingDropdown.remove();
+  }
+
+  void openDropdown() {
+    RenderBox renderBox = actionKey.currentContext.findRenderObject();
+    Offset offset = renderBox.localToGlobal(Offset.zero);
+    height = renderBox.size.height;
+    width = renderBox.size.width;
+    xPosition = offset.dx;
+    yPosition = offset.dy;
+
+    floatingDropdown = createDropdown();
+    Overlay.of(context).insert(floatingDropdown);
   }
 }

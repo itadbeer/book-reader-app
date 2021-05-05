@@ -1,5 +1,6 @@
 import 'package:ibr/ibr.dart';
 
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 void main() {
   runApp(MyApp());
 }
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/account': (context) => Account(),
         '/library': (context) => Library(),
       },
+      navigatorObservers: [routeObserver],
     );
   }
 }
