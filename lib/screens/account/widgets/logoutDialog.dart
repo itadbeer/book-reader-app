@@ -14,7 +14,8 @@ class LogoutDialog extends StatelessWidget {
             children: [
               Text(
                 "آیا می‌خواهید خارج شوید؟",
-                style: TextStyle(color: onSurfaceMediumEmphasis, fontSize: 14),
+                style: TextStyle(
+                    color: onSurfaceMediumEmphasis, fontSize: 14, height: 1.5),
               )
             ],
           ),
