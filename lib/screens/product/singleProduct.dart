@@ -1,5 +1,6 @@
 import 'package:ibr/ibr.dart';
 import 'package:ibr/screens/product/widgets/footerPurchaseBar.dart';
+import 'package:ibr/screens/product/widgets/purchaseConfirmation.dart';
 
 class SingleProduct extends StatelessWidget {
   @override
@@ -76,17 +77,25 @@ class SingleProduct extends StatelessWidget {
               Row(children: [
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Container(
-                    width: 96,
-                    height: 36,
-                    margin: EdgeInsets.only(top: 16, bottom: 24),
-                    decoration: BoxDecoration(
-                        color: myTheme.primaryColor,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                    child: Center(
-                      child: Text(
-                        "خرید",
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                  child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              PurchaseConfirmationDialog());
+                    },
+                    child: Container(
+                      width: 96,
+                      height: 36,
+                      margin: EdgeInsets.only(top: 16, bottom: 24),
+                      decoration: BoxDecoration(
+                          color: myTheme.primaryColor,
+                          borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                      child: Center(
+                        child: Text(
+                          "خرید",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
                       ),
                     ),
                   ),

@@ -5,6 +5,7 @@ class LogoutDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      insetPadding: EdgeInsets.zero,
       child: Container(
         width: 280,
         height: 118,
