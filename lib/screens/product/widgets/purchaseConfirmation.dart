@@ -1,4 +1,5 @@
 import 'package:ibr/ibr.dart';
+import 'package:ibr/utils/loadingDialog.dart';
 
 class PurchaseConfirmationDialog extends StatelessWidget {
   @override
@@ -99,6 +100,16 @@ class PurchaseConfirmationDialog extends StatelessWidget {
                   child: Container(
                       margin: EdgeInsets.only(bottom: 8),
                       child: Button(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) =>
+                                    LoadingDialog());
+                            Future.delayed(new Duration(seconds: 3), () {
+                              Navigator.pop(context);
+                            });
+                          },
                           textAlign: TextAlign.center,
                           padding: EdgeInsets.symmetric(vertical: 8),
                           text: "انتقال به درگاه پرداخت",

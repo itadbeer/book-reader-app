@@ -19,6 +19,7 @@ class HorizontalProductCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(left: 16),
       height: 96,
+      width: 358,
       decoration: BoxDecoration(
         color: onPrimaryHighEmphasis,
         border: Border.all(color: onSurfaceBorder, width: 1),
@@ -42,65 +43,72 @@ class HorizontalProductCard extends StatelessWidget {
               ),
             ),
           ]),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Row(children: [
-              Container(
-                margin: EdgeInsets.only(top: 16, bottom: 20),
-                child: GestureDetector(
-                  onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
-                  child: Text(
-                    this.name,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal),
-                  ),
-                ),
-              ),
-            ]),
-            Row(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(left: 8),
-                  width: 32,
-                  height: 22,
-                  color: Colors.transparent,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: myTheme.primaryColor,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                    child: Center(
+          Column(
+              textDirection: TextDirection.rtl,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 16, bottom: 20),
+                    child: GestureDetector(
+                      onTap: () =>
+                          {Navigator.pushNamed(context, '/singleProduct')},
                       child: Text(
-                        "${this.discountAmount}%",
+                        this.name,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 14,
-                            fontWeight: FontWeight.w500),
+                            fontWeight: FontWeight.normal,
+                            height: 1.5),
                       ),
                     ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 8),
-                  child: Text(this.price,
-                      style: TextStyle(
-                          color: onSurfaceMediumEmphasis,
-                          decoration: TextDecoration.lineThrough,
-                          fontSize: 14)),
-                ),
-                RichText(
-                    text: TextSpan(
-                        text: this.finalPrice,
-                        style: TextStyle(
+                ]),
+                Row(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(left: 8),
+                      width: 32,
+                      height: 22,
+                      color: Colors.transparent,
+                      child: Container(
+                        decoration: BoxDecoration(
                             color: myTheme.primaryColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500))),
-                Text(" تومان",
-                    style:
-                        TextStyle(color: onSurfaceMediumEmphasis, fontSize: 12))
-              ],
-            ),
-          ]),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(8.0))),
+                        child: Center(
+                          child: Text(
+                            "${this.discountAmount}%",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 8),
+                      child: Text(this.price,
+                          style: TextStyle(
+                              color: onSurfaceMediumEmphasis,
+                              decoration: TextDecoration.lineThrough,
+                              fontSize: 14)),
+                    ),
+                    RichText(
+                        text: TextSpan(
+                            text: this.finalPrice,
+                            style: TextStyle(
+                                color: myTheme.primaryColor,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500))),
+                    Text(" تومان",
+                        style: TextStyle(
+                            color: onSurfaceMediumEmphasis, fontSize: 12))
+                  ],
+                ),
+              ]),
         ],
       ),
     );
