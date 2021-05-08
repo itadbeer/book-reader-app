@@ -7,7 +7,7 @@ Container buildProductCard(BuildContext context) {
     child: Column(
       children: <Widget>[
         Container(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
@@ -16,7 +16,6 @@ Container buildProductCard(BuildContext context) {
           child: Column(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.all(8),
                 child: GestureDetector(
                   onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
                   child: ClipRRect(

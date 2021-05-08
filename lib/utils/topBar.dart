@@ -1,10 +1,12 @@
 import 'package:ibr/ibr.dart';
+import 'package:ibr/screens/discovery/widgets/searchBar.dart';
 
 class TopBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final Color bgColor;
   final bool displayGoBackButton;
   final bool displayActionButton;
+  final bool displaySearchBar;
   final String actionButtonText;
   final String actionButtonLink;
   const TopBar(
@@ -14,7 +16,8 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
       this.displayGoBackButton,
       this.displayActionButton,
       this.actionButtonText,
-      this.actionButtonLink});
+      this.actionButtonLink,
+      this.displaySearchBar});
   @override
   Size get preferredSize => new Size.fromHeight(kToolbarHeight);
   @override
@@ -29,20 +32,27 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               buildGoBackButton(context),
-              Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(this.title ?? "",
-                        style: TextStyle(
-                            color: onSurfaceHighEmphasis,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500))
-                  ]),
+              buildPageTitle(),
+              buildSearchBar(context),
               Spacer(),
               buildAppBarButton(context)
             ],
           )),
     );
+  }
+
+  Column buildPageTitle() {
+    return title != null && title.isNotEmpty
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+                Text(this.title ?? "",
+                    style: TextStyle(
+                        color: onSurfaceHighEmphasis,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500))
+              ])
+        : Column(children: []);
   }
 
   Column buildAppBarButton(BuildContext context) {
@@ -84,5 +94,11 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           )
         : Container();
+  }
+
+  Column buildSearchBar(BuildContext context) {
+    return this.displaySearchBar != null && this.displaySearchBar
+        ? Column(children: [SearchBar()])
+        : Column(children: []);
   }
 }

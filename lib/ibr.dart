@@ -19,6 +19,7 @@ export 'package:ibr/utils/theme.dart';
 export 'package:ibr/utils/myFloatingNavigationBar.dart';
 export 'package:ibr/utils/option.dart';
 export 'package:ibr/utils/button.dart';
+export 'package:ibr/utils/customSearchDelegate.dart';
 
 export 'package:flutter_localizations/flutter_localizations.dart';
 

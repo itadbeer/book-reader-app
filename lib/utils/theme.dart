@@ -10,6 +10,16 @@ final surface = Color.fromRGBO(255, 255, 255, 1);
 final primaryLightVariant = Color.fromRGBO(79, 179, 191, 1);
 final error = Color.fromRGBO(243, 26, 63, 1);
 final ThemeData myTheme = ThemeData(
+  appBarTheme: AppBarTheme(
+    titleSpacing: 0,
+    elevation: 0,
+    brightness: Brightness.light,
+    backgroundColor: onPrimaryHighEmphasis,
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    border: InputBorder.none,
+    enabledBorder: InputBorder.none,
+  ),
   splashColor: Colors.transparent,
   highlightColor: Colors.transparent,
   hoverColor: Colors.transparent,

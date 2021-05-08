@@ -1,8 +1,17 @@
 import 'package:ibr/ibr.dart';
 
 class SearchBar extends StatefulWidget {
+  final Function onSubmitted;
+  final double height;
+  final double width;
+  final bool enabled;
+
   const SearchBar({
     Key key,
+    this.height,
+    this.width,
+    this.enabled,
+    this.onSubmitted,
   }) : super(key: key);
 
   @override
@@ -37,9 +46,11 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: MediaQuery.of(context).size.width - 32,
-        height: 56,
+        width: widget.width ?? MediaQuery.of(context).size.width - 32,
+        height: widget.height ?? 56,
         child: TextField(
+          onEditingComplete: widget.onSubmitted ?? () {},
+          enabled: widget.enabled,
           controller: _searchController,
           decoration: InputDecoration(
             filled: true,

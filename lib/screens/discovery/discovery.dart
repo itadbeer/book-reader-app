@@ -20,7 +20,17 @@ class Discovery extends StatelessWidget {
             padding: EdgeInsets.all(16),
             child: Column(
               children: <Widget>[
-                SearchBar(),
+                GestureDetector(
+                  child: SearchBar(
+                    enabled: false,
+                  ),
+                  onTap: () {
+                    showSearch(
+                        context: context,
+                        delegate: CustomSearchDelegate(hintText: "جست‌وجو"),
+                        query: "متن تستی");
+                  },
+                ),
                 CardsSection(title: "محبوب ترین ها"),
                 CardsSection(title: "آخرین ها"),
                 SizedBox(height: 88)
