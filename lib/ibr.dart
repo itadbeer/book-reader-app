@@ -2,6 +2,7 @@ library ibr;
 
 export 'package:flutter/material.dart';
 export 'package:cached_network_image/cached_network_image.dart';
+export 'package:provider/provider.dart';
 
 export 'package:ibr/screens/publisherWriterTranslator.dart';
 export 'package:ibr/screens/discovery/discovery.dart';

@@ -2,44 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:ibr/ibr.dart';
-import 'package:ibr/screens/library/widgets/myDropdownButton.dart';
 
-final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
-
-class LibraryItem extends StatefulWidget {
+class LibraryItem extends StatelessWidget {
   final String name;
   final String thumbnailUrl;
   final DownloadStatus status;
   const LibraryItem({Key key, this.name, this.thumbnailUrl, this.status})
       : super(key: key);
-
-  @override
-  _LibraryItemState createState() => _LibraryItemState();
-}
-
-class _LibraryItemState extends State<LibraryItem> with RouteAware {
-  GlobalKey actionKey;
-  double height, width, xPosition, yPosition;
-  OverlayEntry floatingDropdown;
-  bool isDropdownOpened = false;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // routeObserver is the global variable we created before
-    routeObserver.subscribe(this, ModalRoute.of(context));
-  }
-
-  @override
-  void dispose() {
-    routeObserver.unsubscribe(this);
-    super.dispose();
-  }
-
-  @override
-  void didPop() {
-    floatingDropdown.remove();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +32,7 @@ class _LibraryItemState extends State<LibraryItem> with RouteAware {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: CachedNetworkImage(
-                    imageUrl: widget.thumbnailUrl,
+                    imageUrl: thumbnailUrl,
                   ),
                 ),
               ),
@@ -76,7 +45,7 @@ class _LibraryItemState extends State<LibraryItem> with RouteAware {
                 child: GestureDetector(
                   onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
                   child: Text(
-                    widget.name,
+                    name,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 14,
@@ -85,7 +54,7 @@ class _LibraryItemState extends State<LibraryItem> with RouteAware {
                 ),
               ),
             ]),
-            buildDownloadBar(widget.status),
+            buildDownloadBar(status),
           ]),
         ],
       ),
@@ -133,7 +102,6 @@ class _LibraryItemState extends State<LibraryItem> with RouteAware {
               text: "لغو دانلود",
               textColor: onPrimaryHighEmphasis,
             ),
-            // onSelected: handleClick,
             itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem(
@@ -209,35 +177,5 @@ class _LibraryItemState extends State<LibraryItem> with RouteAware {
           ],
         );
     }
-  }
-
-  OverlayEntry createDropdown() {
-    return OverlayEntry(builder: (context) {
-      return Positioned(
-        top: yPosition + height + 4,
-        right: xPosition - width + 42,
-        child: MyDropdownButton(
-          backgroundColor: error,
-          text: "لغو دانلود",
-          textColor: onPrimaryHighEmphasis,
-        ),
-      );
-    });
-  }
-
-  void closeDropdown() {
-    floatingDropdown.remove();
-  }
-
-  void openDropdown() {
-    RenderBox renderBox = actionKey.currentContext.findRenderObject();
-    Offset offset = renderBox.localToGlobal(Offset.zero);
-    height = renderBox.size.height;
-    width = renderBox.size.width;
-    xPosition = offset.dx;
-    yPosition = offset.dy;
-
-    floatingDropdown = createDropdown();
-    Overlay.of(context).insert(floatingDropdown);
   }
 }

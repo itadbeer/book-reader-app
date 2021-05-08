@@ -60,47 +60,23 @@ class Login extends StatelessWidget {
   }
 }
 
-class MyTextBox extends StatefulWidget {
+class MyTextBox extends StatelessWidget {
   final String caption;
   final String placeholder;
   const MyTextBox({Key key, this.caption, this.placeholder}) : super(key: key);
 
   @override
-  _MyTextBoxState createState() => _MyTextBoxState();
-}
-
-class _MyTextBoxState extends State<MyTextBox> {
-  FocusNode _mobileFocusNode;
-
-  @override
-  void initState() {
-    super.initState();
-    _mobileFocusNode = FocusNode();
-  }
-
-  @override
-  void dispose() {
-    _mobileFocusNode.dispose();
-    super.dispose();
-  }
-
-  void _requestFocus() {
-    setState(() {
-      FocusScope.of(context).requestFocus(_mobileFocusNode);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    var textFieldHasFocus = false;
     return Column(
       children: [
         Row(
           children: [
             Container(
                 margin: EdgeInsets.only(top: 24),
-                child: Text(widget.caption,
+                child: Text(this.caption,
                     style: TextStyle(
-                        color: _mobileFocusNode.hasFocus
+                        color: textFieldHasFocus
                             ? myTheme.primaryColor
                             : onSurfaceMediumEmphasis,
                         fontSize: 16)))
@@ -111,28 +87,32 @@ class _MyTextBoxState extends State<MyTextBox> {
             Container(
               margin: EdgeInsets.only(top: 8),
               width: MediaQuery.of(context).size.width - 32,
-              child: TextField(
-                textInputAction: TextInputAction.done,
-                focusNode: _mobileFocusNode,
-                onTap: _requestFocus,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.only(right: 24, left: 24),
-                  filled: true,
-                  fillColor: Color.fromRGBO(0, 0, 0, 0.04),
-                  labelStyle:
-                      TextStyle(color: onSurfaceHighEmphasis, fontSize: 16),
-                  hintStyle: TextStyle(color: onSurfaceDisabled, fontSize: 16),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(16)),
-                  border: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(width: 1, color: primaryLightVariant),
-                      borderRadius: BorderRadius.circular(16)),
-                  disabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(16)),
-                  hintText: widget.placeholder ?? "",
+              child: Focus(
+                onFocusChange: (hasFocus) {
+                  textFieldHasFocus = hasFocus;
+                },
+                child: TextField(
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.only(right: 24, left: 24),
+                    filled: true,
+                    fillColor: Color.fromRGBO(0, 0, 0, 0.04),
+                    labelStyle:
+                        TextStyle(color: onSurfaceHighEmphasis, fontSize: 16),
+                    hintStyle:
+                        TextStyle(color: onSurfaceDisabled, fontSize: 16),
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(16)),
+                    border: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(width: 1, color: primaryLightVariant),
+                        borderRadius: BorderRadius.circular(16)),
+                    disabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(16)),
+                    hintText: this.placeholder ?? "",
+                  ),
                 ),
               ),
             ),
