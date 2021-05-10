@@ -1,3 +1,4 @@
+from config import *
 import db
 from typing import List, Any
 from sms_token import Token
@@ -80,12 +81,16 @@ class User(Token):
         token = Token(mobile).create()
         # Send SMS containing Token to the mobile
         sms_result = SMS.send_token(token, mobile)
+        if not IS_PRODUCTION:
+            return True
         if len(sms_result) > 0 and sms_result['status'] == 200:
             return True
         else:
             return False
 
     def verify_login(self, mobile, user_token) -> bool:
+        if not IS_PRODUCTION:
+            return True
         if not self.exist(mobile):
             self.add(mobile)
         return Token(mobile).verify(user_token)

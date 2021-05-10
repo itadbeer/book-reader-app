@@ -1,14 +1,14 @@
+IS_PRODUCTION = False
+
 DB_NAME = "app"
-DB_USER = "edris"
+DB_USER = "postgres"
 DB_PASSWORD = "11100077"
 DB_HOST = "127.0.0.1"
 DB_PORT = "5432"
 
-
 # API Configuration
-API_HOST = "127.0.0.1"
+API_HOST = "0.0.0.0"
 API_PORT = 7000
-API_DEBUG = True
 API_SECRET_KEY = "thisisasimpletest,justatest,yeah,no,yeah,no,tea,coffe,test"
 API_VERSIONS = ["1.0"]
 

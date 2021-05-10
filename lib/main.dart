@@ -1,7 +1,6 @@
 import 'package:ibr/SearchFieldHandler.dart';
 import 'package:ibr/ibr.dart';
 
-final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 void main() {
   runApp(MyApp());
 }
@@ -9,8 +8,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<SearchHandler>(
-      create: (context) => SearchHandler(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SearchHandler>(
+            create: (context) => SearchHandler()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         localizationsDelegates: [
@@ -37,7 +39,6 @@ class MyApp extends StatelessWidget {
           '/account': (context) => Account(),
           '/library': (context) => Library(),
         },
-        navigatorObservers: [routeObserver],
       ),
     );
   }
