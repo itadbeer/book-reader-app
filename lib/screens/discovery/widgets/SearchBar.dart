@@ -1,4 +1,4 @@
-import 'package:ibr/SearchFieldHandler.dart';
+import 'package:ibr/providers/searchFieldHandler.dart';
 import 'package:ibr/ibr.dart';
 
 class SearchBar extends StatelessWidget {

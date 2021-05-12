@@ -1,7 +1,8 @@
-import 'package:ibr/SearchFieldHandler.dart';
+import 'package:ibr/providers/searchFieldHandler.dart';
 import 'package:ibr/ibr.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(MyApp());
 }
 
@@ -12,6 +13,15 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<SearchHandler>(
             create: (context) => SearchHandler()),
+        ChangeNotifierProvider<UserHandler>(
+          create: (context) => UserHandler(),
+        ),
+        ChangeNotifierProvider<TextBoxProvider>(
+          create: (context) => TextBoxProvider(TextBoxState.normal),
+        ),
+        ChangeNotifierProvider<ButtonProvider>(
+          create: (context) => ButtonProvider(ButtonState.disabled),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -34,8 +44,8 @@ class MyApp extends StatelessWidget {
           '/category': (context) => Category(),
           '/publisherWriterTranslator': (context) =>
               PublisherWriterTranslator(),
-          '/login': (context) => Login(),
-          '/codeVerification': (context) => CodeVerification(),
+          '/login': (context) => LoginScreen(),
+          '/codeVerification': (context) => CodeVerificationScreen(),
           '/account': (context) => Account(),
           '/library': (context) => Library(),
         },

@@ -1,6 +1,6 @@
 import 'package:ibr/ibr.dart';
 
-int current_index = 0;
+int currentIndex = 0;
 
 class MyFloatingNavigationBar extends StatelessWidget {
   const MyFloatingNavigationBar({
@@ -20,7 +20,7 @@ class MyFloatingNavigationBar extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(16.0)),
         child: BottomNavigationBar(
           elevation: 0,
-          currentIndex: current_index,
+          currentIndex: currentIndex,
           backgroundColor: onPrimaryHighEmphasis,
           selectedItemColor: myTheme.primaryColor,
           unselectedItemColor: onSurface,
@@ -29,8 +29,8 @@ class MyFloatingNavigationBar extends StatelessWidget {
           selectedLabelStyle: TextStyle(height: 1.5),
           unselectedLabelStyle: TextStyle(height: 1.5),
           onTap: (newIndex) {
-            current_index = newIndex;
-            switch (current_index) {
+            currentIndex = newIndex;
+            switch (currentIndex) {
               case 0:
                 Navigator.pushReplacementNamed(context, '/');
                 break;
@@ -38,7 +38,9 @@ class MyFloatingNavigationBar extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/categories');
                 break;
               default:
-                Navigator.pushReplacementNamed(context, '/library');
+                if (isLoggedIn()) {
+                  Navigator.pushReplacementNamed(context, '/library');
+                }
             }
           },
           items: [

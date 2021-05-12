@@ -5,14 +5,15 @@ import 'package:ibr/screens/discovery/widgets/searchBar.dart';
 class Discovery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final mobile = GetStorage().read('mobile');
     return Scaffold(
       extendBody: true,
       appBar: TopBar(
         title: "کتاب خوان",
         displayGoBackButton: false,
         displayActionButton: true,
-        actionButtonText: 'ورود به حساب',
-        actionButtonLink: '/login',
+        actionButtonText: !isLoggedIn() ? 'ورود به حساب' : mobile,
+        actionButtonLink: !isLoggedIn() ? '/login' : '/account',
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,

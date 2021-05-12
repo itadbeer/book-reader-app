@@ -1,6 +1,6 @@
 import 'package:ibr/ibr.dart';
 
-Container buildProductCard(BuildContext context) {
+Container buildProductCard(BuildContext context, title) {
   return Container(
     width: 150,
     margin: EdgeInsets.only(left: 8, top: 16),
@@ -30,7 +30,7 @@ Container buildProductCard(BuildContext context) {
               ),
               GestureDetector(
                 onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
-                child: Text("ترجمه لغات و اصطلاحات کل سلسله العربیة بین یدیک",
+                child: Text(title,
                     style: TextStyle(fontSize: 14, color: Colors.black)),
               ),
               Container(
@@ -113,9 +113,10 @@ class CardsSection extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
-            buildProductCard(context),
-            buildProductCard(context),
-            buildProductCard(context)
+            buildProductCard(
+                context, "ترجمه لغات و اصطلاحات کل سلسله العربیة بین یدیک"),
+            buildProductCard(context, "عنوان تستی"),
+            buildProductCard(context, "متن تستی به عنوان تایتل کتاب")
           ],
         ),
       )

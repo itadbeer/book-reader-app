@@ -1,8 +1,12 @@
+import 'package:ibr/api/login.dart';
 import 'package:ibr/ibr.dart';
 
-class Login extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
+  var mobileTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    print(isLoggedIn());
+    final buttonProvider = Provider.of<ButtonProvider>(context);
     return Scaffold(
         extendBody: true,
         appBar: TopBar(
@@ -26,7 +30,18 @@ class Login extends StatelessWidget {
                   ),
                 )
               ]),
-              MyTextBox(caption: "شمارۀ همراه", placeholder: "09-- --- ----"),
+              MyTextBox(
+                  keyboardType: TextInputType.phone,
+                  controller: mobileTextController,
+                  onChanged: (String text) => {
+                        // todo: validate mobile number
+                        if (!isAValidMobileNumber(mobileTextController.text))
+                          {buttonProvider.setSate(ButtonState.disabled)}
+                        else
+                          {buttonProvider.setSate(ButtonState.active)}
+                      },
+                  caption: "شمارۀ همراه",
+                  placeholder: "09-- --- ----"),
               Container(
                   width: MediaQuery.of(context).size.width - 32,
                   height: 40,
@@ -34,20 +49,8 @@ class Login extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: onSurfaceBorder,
                       borderRadius: BorderRadius.circular(8)),
-                  child: TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/codeVerification');
-                      },
-                      child: Container(
-                          child: Center(
-                              child: Text(
-                        "ارسال کد تایید",
-                        style: TextStyle(
-                          color: onSurfaceDisabled,
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ))))),
+                  child:
+                      SubmitButton(mobileTextController: mobileTextController)),
               Container(
                   margin: EdgeInsets.only(top: 24),
                   child: Text(
@@ -60,65 +63,49 @@ class Login extends StatelessWidget {
   }
 }
 
-class MyTextBox extends StatelessWidget {
-  final String caption;
-  final String placeholder;
-  const MyTextBox({Key key, this.caption, this.placeholder}) : super(key: key);
+class SubmitButton extends StatelessWidget {
+  const SubmitButton({
+    Key key,
+    @required this.mobileTextController,
+  }) : super(key: key);
+
+  final TextEditingController mobileTextController;
 
   @override
   Widget build(BuildContext context) {
-    var textFieldHasFocus = false;
-    return Column(
-      children: [
-        Row(
-          children: [
-            Container(
-                margin: EdgeInsets.only(top: 24),
-                child: Text(this.caption,
-                    style: TextStyle(
-                        color: textFieldHasFocus
-                            ? myTheme.primaryColor
-                            : onSurfaceMediumEmphasis,
-                        fontSize: 16)))
-          ],
-        ),
-        Row(
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 8),
-              width: MediaQuery.of(context).size.width - 32,
-              child: Focus(
-                onFocusChange: (hasFocus) {
-                  textFieldHasFocus = hasFocus;
-                },
-                child: TextField(
-                  textInputAction: TextInputAction.done,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.only(right: 24, left: 24),
-                    filled: true,
-                    fillColor: Color.fromRGBO(0, 0, 0, 0.04),
-                    labelStyle:
-                        TextStyle(color: onSurfaceHighEmphasis, fontSize: 16),
-                    hintStyle:
-                        TextStyle(color: onSurfaceDisabled, fontSize: 16),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(16)),
-                    border: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(width: 1, color: primaryLightVariant),
-                        borderRadius: BorderRadius.circular(16)),
-                    disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(16)),
-                    hintText: this.placeholder ?? "",
-                  ),
-                ),
-              ),
+    final buttonProvider = Provider.of<ButtonProvider>(context);
+    return TextButton(
+        onPressed: buttonProvider.state == ButtonState.disabled
+            ? null
+            : () async {
+                Provider.of<UserHandler>(context, listen: false)
+                    .updateMobile(mobileTextController.text);
+                var login = Login(mobile: mobileTextController.text);
+                var result = await login.requestVerificationCode();
+                if (result) {
+                  Navigator.pushNamed(context, '/codeVerification');
+                }
+              },
+        child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: buttonProvider.state == ButtonState.normal
+                  ? myTheme.primaryColor
+                  : buttonProvider.state == ButtonState.active
+                      ? myTheme.primaryColorDark
+                      : onSurfaceBorder,
             ),
-          ],
-        ),
-      ],
-    );
+            child: Center(
+                child: Text(
+              "ارسال کد تایید",
+              style: TextStyle(
+                color: buttonProvider.state == ButtonState.normal ||
+                        buttonProvider.state == ButtonState.active
+                    ? onPrimaryHighEmphasis
+                    : onSurfaceDisabled,
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+              ),
+            ))));
   }
 }

@@ -46,9 +46,15 @@ class LogoutDialog extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      child: Text(
-                        "خروج",
-                        style: TextStyle(color: error, fontSize: 14),
+                      child: GestureDetector(
+                        onTap: () {
+                          GetStorage().remove('mobile');
+                          Navigator.pushReplacementNamed(context, '/login');
+                        },
+                        child: Text(
+                          "خروج",
+                          style: TextStyle(color: error, fontSize: 14),
+                        ),
                       ),
                     )
                   ],

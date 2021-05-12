@@ -1,9 +1,25 @@
 library ibr;
 
+// Dependecy libraries
 export 'package:flutter/material.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'package:provider/provider.dart';
+export 'package:flutter_localizations/flutter_localizations.dart';
+export 'package:http/http.dart';
+export 'dart:convert';
+export 'package:get_storage/get_storage.dart';
 
+// Functions
+export 'package:ibr/functions/validation.dart';
+export 'package:ibr/functions/authentication.dart';
+
+// Providers
+export 'package:ibr/providers/userHandler.dart';
+export 'package:ibr/providers/textBoxProvider.dart';
+export 'package:ibr/providers/buttonProvider.dart';
+export 'package:ibr/providers/timerProvider.dart';
+
+// Screens
 export 'package:ibr/screens/publisherWriterTranslator.dart';
 export 'package:ibr/screens/discovery/discovery.dart';
 export 'package:ibr/screens/category/categories.dart';
@@ -21,7 +37,12 @@ export 'package:ibr/utils/myFloatingNavigationBar.dart';
 export 'package:ibr/utils/option.dart';
 export 'package:ibr/utils/button.dart';
 export 'package:ibr/utils/customSearchDelegate.dart';
-
-export 'package:flutter_localizations/flutter_localizations.dart';
+export 'package:ibr/utils/myTextBox.dart';
 
 enum DownloadStatus { downloaded, downloading, normal }
+// API configurations
+String endpoint = "http://127.0.0.1:7000/";
+Map<String, String> headers = {
+  'api_version': '1.0',
+  'secret_key': 'thisisasimpletest,justatest,yeah,no,yeah,no,tea,coffe,test',
+};

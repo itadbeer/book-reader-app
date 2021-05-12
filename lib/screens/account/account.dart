@@ -4,6 +4,7 @@ import 'package:ibr/screens/account/widgets/logoutDialog.dart';
 class Account extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final mobile = GetStorage().read('mobile');
     return Scaffold(
         extendBody: true,
         appBar: TopBar(
@@ -21,7 +22,7 @@ class Account extends StatelessWidget {
                     Option(
                       padding: EdgeInsets.all(16),
                       children: [
-                        Text("0930 622 2326",
+                        Text(mobile,
                             style: TextStyle(
                                 color: onSurfaceMediumEmphasis, fontSize: 16))
                       ],
