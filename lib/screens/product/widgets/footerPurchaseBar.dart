@@ -1,4 +1,5 @@
 import 'package:ibr/ibr.dart';
+import 'package:ibr/screens/product/widgets/purchaseConfirmation.dart';
 
 class FooterPurchaseBar extends StatelessWidget {
   const FooterPurchaseBar({
@@ -70,16 +71,28 @@ class FooterPurchaseBar extends StatelessWidget {
             children: [
               Align(
                 alignment: Alignment.centerRight,
-                child: Container(
-                  width: 96,
-                  height: 36,
-                  decoration: BoxDecoration(
-                      color: myTheme.primaryColor,
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                  child: Center(
-                    child: Text(
-                      "خرید",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                child: GestureDetector(
+                  onTap: () {
+                    if (isLoggedIn()) {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              PurchaseConfirmationDialog());
+                    } else {
+                      Navigator.pushNamed(context, '/login');
+                    }
+                  },
+                  child: Container(
+                    width: 96,
+                    height: 36,
+                    decoration: BoxDecoration(
+                        color: myTheme.primaryColor,
+                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                    child: Center(
+                      child: Text(
+                        "خرید",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      ),
                     ),
                   ),
                 ),

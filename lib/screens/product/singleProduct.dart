@@ -79,10 +79,14 @@ class SingleProduct extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: GestureDetector(
                     onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) =>
-                              PurchaseConfirmationDialog());
+                      if (isLoggedIn()) {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                PurchaseConfirmationDialog());
+                      } else {
+                        Navigator.pushNamed(context, '/login');
+                      }
                     },
                     child: Container(
                       width: 96,

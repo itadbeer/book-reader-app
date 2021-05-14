@@ -34,6 +34,7 @@ dependencies:
   get_storage:
 
 dev_dependencies:
+  test:
   flutter_test:
     sdk: flutter
 

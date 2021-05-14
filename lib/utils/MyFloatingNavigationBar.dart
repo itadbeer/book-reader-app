@@ -40,6 +40,8 @@ class MyFloatingNavigationBar extends StatelessWidget {
               default:
                 if (isLoggedIn()) {
                   Navigator.pushReplacementNamed(context, '/library');
+                } else {
+                  Navigator.pushNamed(context, '/login');
                 }
             }
           },

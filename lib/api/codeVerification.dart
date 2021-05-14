@@ -10,7 +10,7 @@ class CodeVerification {
         headers: headers, body: {'mobile': user.mobile, 'token': token});
     if (response.statusCode == 200) {
       String data = response.body;
-      return json.decode(data)["result"];
+      return json.decode(data);
     } else {
       throw Exception('Error: statusCode= ${response.statusCode}');
     }

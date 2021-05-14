@@ -16,9 +16,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<UserHandler>(
           create: (context) => UserHandler(),
         ),
-        ChangeNotifierProvider<TextBoxProvider>(
-          create: (context) => TextBoxProvider(TextBoxState.normal),
-        ),
         ChangeNotifierProvider<ButtonProvider>(
           create: (context) => ButtonProvider(ButtonState.disabled),
         ),
@@ -45,7 +42,11 @@ class MyApp extends StatelessWidget {
           '/publisherWriterTranslator': (context) =>
               PublisherWriterTranslator(),
           '/login': (context) => LoginScreen(),
-          '/codeVerification': (context) => CodeVerificationScreen(),
+          '/codeVerification': (context) =>
+              ChangeNotifierProvider<TextBoxProvider>(
+                create: (context) => TextBoxProvider(TextBoxState.normal),
+                child: CodeVerificationScreen(),
+              ),
           '/account': (context) => Account(),
           '/library': (context) => Library(),
         },

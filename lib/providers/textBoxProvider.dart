@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:ibr/ibr.dart';
 
-enum TextBoxState { normal, active, disabled }
+enum TextBoxState { normal, active, disabled, error }
 
 class TextBoxProvider extends ChangeNotifier {
   TextBoxState state;

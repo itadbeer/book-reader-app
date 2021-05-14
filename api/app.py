@@ -62,7 +62,7 @@ if __name__ == "__main__":
         if request_version == "1.0":
             mobile = request.values.get('mobile')
             if len(mobile) > 0:
-                return jsonify(result=user.request_login(mobile))
+                return jsonify(user.request_login(mobile))
             else:
                 abort(400)
 
@@ -74,7 +74,7 @@ if __name__ == "__main__":
             mobile = request.values.get('mobile')
             token = request.values.get('token')
             if len(mobile) > 0 and len(token) > 0:
-                return jsonify(result=user.verify_login(mobile, token))
+                return jsonify(user.verify_login(mobile, token))
             else:
                 abort(400)
 
@@ -102,7 +102,7 @@ if __name__ == "__main__":
             else:
                 translator_id = '{}'
             publish_date = request.values.get('publish_date')
-            return jsonify(result=book.add(name=name, description=description,
+            return jsonify(book.add(name=name, description=description,
                                            author_id=author_id,
                                            price=price, image=image,
                                            discount_percentage=discount_percentage,
@@ -156,7 +156,7 @@ if __name__ == "__main__":
     def delete_book(book_id):
         if request_version == "1.0":
             if book.exist(book_id):
-                return jsonify(result=book.delete(book_id))
+                return jsonify(book.delete(book_id))
             else:
                 abort(404)
 
@@ -166,7 +166,7 @@ if __name__ == "__main__":
     def get_book(book_id):
         if request_version == "1.0":
             if book.exist(book_id):
-                return jsonify(result=book.get(book_id))
+                return jsonify(book.get(book_id))
             else:
                 abort(404)
 
@@ -185,7 +185,7 @@ if __name__ == "__main__":
         if request_version == "1.0":
             name = request.values.get('name')
             if len(name) > 0:
-                return jsonify(result=category.add(name))
+                return jsonify(category.add(name))
             else:
                 abort(400)
 
@@ -199,7 +199,7 @@ if __name__ == "__main__":
             else:
                 name = request.values.get('name')
                 if len(name) > 0:
-                    return jsonify(result=category.update(category_id, name))
+                    return jsonify(category.update(category_id, name))
                 else:
                     abort(404)
 
@@ -209,7 +209,7 @@ if __name__ == "__main__":
     def delete_category(category_id):
         if request_version == "1.0":
             if category.exist(category_id):
-                return jsonify(result=category.delete(category_id))
+                return jsonify(category.delete(category_id))
             else:
                 abort(404)
 
@@ -219,7 +219,7 @@ if __name__ == "__main__":
     def get_category(category_id):
         if request_version == "1.0":
             if category.exist(category_id):
-                return jsonify(result=category.get(category_id))
+                return jsonify(category.get(category_id))
             else:
                 abort(404)
 
@@ -239,7 +239,7 @@ if __name__ == "__main__":
             name = request.values.get('name')
             description = request.values.get('description')
             if len(name) > 0:
-                return jsonify(result=publisher.add(name, description))
+                return jsonify(publisher.add(name, description))
             else:
                 abort(400)
 
@@ -254,7 +254,7 @@ if __name__ == "__main__":
                 name = request.values.get('name')
                 description = request.values.get('description')
                 if len(name) > 0:
-                    return jsonify(result=publisher.update(publisher_id, name, description))
+                    return jsonify(publisher.update(publisher_id, name, description))
                 else:
                     abort(404)
 
@@ -264,7 +264,7 @@ if __name__ == "__main__":
     def delete_publisher(publisher_id):
         if request_version == "1.0":
             if publisher.exist(publisher_id):
-                return jsonify(result=publisher.delete(publisher_id))
+                return jsonify(publisher.delete(publisher_id))
             else:
                 abort(404)
 
@@ -274,7 +274,7 @@ if __name__ == "__main__":
     def get_publisher(publisher_id):
         if request_version == "1.0":
             if publisher.exist(publisher_id):
-                return jsonify(result=publisher.get(publisher_id))
+                return jsonify(publisher.get(publisher_id))
             else:
                 abort(404)
 
@@ -294,7 +294,7 @@ if __name__ == "__main__":
             name = request.values.get('name')
             description = request.values.get('description')
             if len(name) > 0:
-                return jsonify(result=author.add(name, description))
+                return jsonify(author.add(name, description))
             else:
                 abort(400)
 
@@ -309,7 +309,7 @@ if __name__ == "__main__":
                 name = request.values.get('name')
                 description = request.values.get('description')
                 if len(name) > 0:
-                    return jsonify(result=author.update(author_id, name, description))
+                    return jsonify(author.update(author_id, name, description))
                 else:
                     abort(400)
 
@@ -319,7 +319,7 @@ if __name__ == "__main__":
     def delete_author(author_id):
         if request_version == "1.0":
             if author.exist(author_id):
-                return jsonify(result=author.delete(author_id))
+                return jsonify(author.delete(author_id))
             else:
                 abort(404)
 
@@ -329,7 +329,7 @@ if __name__ == "__main__":
     def get_author(author_id):
         if request_version == "1.0":
             if author.exist(author_id):
-                return jsonify(result=author.get(author_id))
+                return jsonify(author.get(author_id))
             else:
                 abort(404)
 
@@ -349,7 +349,7 @@ if __name__ == "__main__":
             name = request.values.get('name')
             description = request.values.get('description')
             if len(name) > 0:
-                return jsonify(result=translator.add(name, description))
+                return jsonify(translator.add(name, description))
             else:
                 abort(400)
 
@@ -364,7 +364,7 @@ if __name__ == "__main__":
                 name = request.values.get('name')
                 description = request.values.get('description')
                 if len(name) > 0:
-                    return jsonify(result=translator.update(translator_id, name, description))
+                    return jsonify(translator.update(translator_id, name, description))
                 else:
                     abort(400)
 
@@ -374,7 +374,7 @@ if __name__ == "__main__":
     def delete_translator(translator_id):
         if request_version == "1.0":
             if translator.exist(translator_id):
-                return jsonify(result=translator.delete(translator_id))
+                return jsonify(translator.delete(translator_id))
             else:
                 abort(404)
 
@@ -384,7 +384,7 @@ if __name__ == "__main__":
     def get_translator(translator_id):
         if request_version == "1.0":
             if translator.exist(translator_id):
-                return jsonify(result=translator.get(translator_id))
+                return jsonify(translator.get(translator_id))
             else:
                 abort(404)
 

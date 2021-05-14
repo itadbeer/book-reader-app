@@ -23,6 +23,7 @@ class MyTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textBoxProvider = Provider.of<TextBoxProvider>(context);
+    print(textBoxProvider.state);
     return Column(
       children: [
         Row(
@@ -41,8 +42,13 @@ class MyTextBox extends StatelessWidget {
               width: MediaQuery.of(context).size.width - 32,
               child: Focus(
                 onFocusChange: (hasFocus) {
-                  textBoxProvider.setSate(
-                      hasFocus ? TextBoxState.active : TextBoxState.normal);
+                  if (textBoxProvider.state != TextBoxState.error) {
+                    if (hasFocus) {
+                      textBoxProvider.setSate(TextBoxState.active);
+                    } else {
+                      textBoxProvider.setSate(TextBoxState.normal);
+                    }
+                  }
                 },
                 child: TextField(
                   maxLength: maxLength,
@@ -59,6 +65,12 @@ class MyTextBox extends StatelessWidget {
                     labelStyle:
                         TextStyle(color: onSurfaceHighEmphasis, fontSize: 16),
                     hintTextDirection: TextDirection.rtl,
+                    errorText: textBoxProvider.state == TextBoxState.error
+                        ? 'کد وارد شده صحیح نمی باشد'
+                        : null,
+                    errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 1, color: error),
+                        borderRadius: BorderRadius.circular(16)),
                     hintStyle:
                         TextStyle(color: onSurfaceDisabled, fontSize: 16),
                     enabledBorder: OutlineInputBorder(
@@ -88,6 +100,8 @@ class MyTextBox extends StatelessWidget {
         return myTheme.primaryColor;
       case TextBoxState.normal:
         return onSurfaceMediumEmphasis;
+      case TextBoxState.error:
+        return error;
       default:
         return onSurfaceMediumEmphasis;
     }

@@ -8,12 +8,17 @@ class CodeVerificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textBoxProvider = Provider.of<TextBoxProvider>(context);
     final user = Provider.of<UserHandler>(context, listen: false).user;
     final codeVerification = CodeVerification(user);
     var timerProvider = TimerProvider(counter: 60);
     timerProvider.startTimer();
-    return ChangeNotifierProvider<TimerProvider>(
-      create: (context) => timerProvider,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<TimerProvider>(
+          create: (context) => timerProvider,
+        ),
+      ],
       child: Scaffold(
           extendBody: true,
           appBar: TopBar(
@@ -44,8 +49,10 @@ class CodeVerificationScreen extends StatelessWidget {
                         if (await codeVerification.verifyCode(code))
                           {signInUser(context, user)}
                         else
-                          {print('error')}
+                          {textBoxProvider.setSate(TextBoxState.error)}
                       }
+                    else
+                      {textBoxProvider.setSate(TextBoxState.active)}
                   },
                   maxLength: 4,
                   keyboardType: TextInputType.number,

@@ -1,23 +1,4 @@
 class Book {
-  BookResult result;
-
-  Book({this.result});
-
-  Book.fromJson(Map<String, dynamic> json) {
-    result =
-        json['result'] != null ? new BookResult.fromJson(json['result']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.result != null) {
-      data['result'] = this.result.toJson();
-    }
-    return data;
-  }
-}
-
-class BookResult {
   List<int> authorId;
   List<int> categoryId;
   String description;
@@ -31,7 +12,7 @@ class BookResult {
   List<int> publisherId;
   List<int> translatorId;
 
-  BookResult(
+  Book(
       {this.authorId,
       this.categoryId,
       this.description,
@@ -45,7 +26,7 @@ class BookResult {
       this.publisherId,
       this.translatorId});
 
-  BookResult.fromJson(Map<String, dynamic> json) {
+  Book.fromJson(Map<String, dynamic> json) {
     authorId = json['author_id'].cast<int>();
     categoryId = json['category_id'].cast<int>();
     description = json['description'];
