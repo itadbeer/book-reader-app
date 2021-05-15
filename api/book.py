@@ -100,9 +100,13 @@ class Book:
             return book_dict
         return book_dict
 
-    def get_all(self) -> List:
+    def get_all(self, limit: int=0, category_id:int =None) -> List:
         """ Get all of books and return as a List """
         query = f"SELECT * FROM {self.table_name}"
+        if category_id != None:
+            query += f" WHERE '{category_id}'=ANY(category_id)"
+        if limit != 0:
+            query += f" LIMIT {limit}"
         try:
             db.cursor.execute(query)
             books: List[Any] = db.cursor.fetchall()

@@ -175,7 +175,9 @@ if __name__ == "__main__":
     @require_authentication
     def get_all_books():
         if request_version == "1.0":
-            return jsonify(results=book.get_all())
+            limit = int(request.args.get("limit"))
+            category_id = request.args.get("category_id")
+            return jsonify(results=book.get_all(limit,category_id))
 
     # Category
     @app.route('/category/add', methods=['POST'])
@@ -228,7 +230,8 @@ if __name__ == "__main__":
     @require_authentication
     def get_all_categories():
         if request_version == "1.0":
-            return jsonify(results=category.get_all())
+            limit = int(request.args.get("limit"))
+            return jsonify(results=category.get_all(limit))
 
     # Publisher
     @app.route('/publisher/add', methods=['POST'])

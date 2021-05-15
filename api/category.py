@@ -56,9 +56,12 @@ class Category:
         }
         return category_dict
 
-    def get_all(self) -> List:
+    def get_all(self, limit=0) -> List:
         """ Get all of categories and return as a List """
-        query = f"SELECT * FROM {self.table_name}"
+        if limit == 0:
+            query = f"SELECT * FROM {self.table_name}"
+        else:
+            query = f"SELECT * FROM {self.table_name} LIMIT {limit}"
         try:
             db.cursor.execute(query)
             categories: List[Any] = db.cursor.fetchall()

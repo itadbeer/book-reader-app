@@ -1,5 +1,10 @@
+import 'package:ibr/models/book.dart';
+import 'package:ibr/models/category.dart';
 import 'package:ibr/providers/searchFieldHandler.dart';
 import 'package:ibr/ibr.dart';
+
+import 'api/books.dart';
+import 'api/categories.dart';
 
 void main() async {
   await GetStorage.init();
@@ -18,6 +23,14 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<ButtonProvider>(
           create: (context) => ButtonProvider(ButtonState.disabled),
+        ),
+        FutureProvider<List<Book>>(
+          initialData: [],
+          create: (_) => getBooks(limit: 10),
+        ),
+        FutureProvider<List<Category>>(
+          initialData: [],
+          create: (_) => getCategories(limit: 0),
         ),
       ],
       child: MaterialApp(
@@ -38,7 +51,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => Discovery(),
           '/singleProduct': (context) => SingleProduct(),
           '/categories': (context) => Categories(),
-          '/category': (context) => Category(),
+          '/category': (context) => CategoryScreen(),
           '/publisherWriterTranslator': (context) =>
               PublisherWriterTranslator(),
           '/login': (context) => LoginScreen(),

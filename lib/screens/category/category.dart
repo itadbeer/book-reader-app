@@ -1,7 +1,7 @@
 import 'package:ibr/ibr.dart';
 import 'package:ibr/screens/product/widgets/horizontalProductCard.dart';
 
-class Category extends StatelessWidget {
+class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +22,8 @@ class Category extends StatelessWidget {
                       child: HorizontalProductCard(
                         name: "ترجمه لغات و اصطلاحات کل سلسله العربی",
                         discountAmount: 75,
-                        price: "45,000",
-                        finalPrice: "11,250",
+                        price: 45000,
+                        finalPrice: 11250,
                         thumbnailUrl:
                             "https://imgcdn.taaghche.com/frontCover/38729.jpg",
                       ),
@@ -37,8 +37,8 @@ class Category extends StatelessWidget {
                       child: HorizontalProductCard(
                         name: "ترجمه لغات و اصطلاحات کل سلسله العربی",
                         discountAmount: 75,
-                        price: "45,000",
-                        finalPrice: "11,250",
+                        price: 45000,
+                        finalPrice: 11250,
                         thumbnailUrl:
                             "https://imgcdn.taaghche.com/frontCover/38729.jpg",
                       ),
@@ -52,8 +52,8 @@ class Category extends StatelessWidget {
                       child: HorizontalProductCard(
                         name: "ترجمه لغات و اصطلاحات کل سلسله العربی",
                         discountAmount: 75,
-                        price: "45,000",
-                        finalPrice: "11,250",
+                        price: 45000,
+                        finalPrice: 11250,
                         thumbnailUrl:
                             "https://imgcdn.taaghche.com/frontCover/38729.jpg",
                       ),

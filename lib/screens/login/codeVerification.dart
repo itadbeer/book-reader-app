@@ -42,6 +42,7 @@ class CodeVerificationScreen extends StatelessWidget {
                   )
                 ]),
                 MyTextBox(
+                  errorText: "کد وارد شده اشتباه است",
                   controller: verificationCodeController,
                   onChanged: (String code) async => {
                     if (verificationCodeController.text.length == 4)

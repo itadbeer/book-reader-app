@@ -62,8 +62,8 @@ class PublisherWriterTranslator extends StatelessWidget {
                       child: HorizontalProductCard(
                         name: "ترجمه لغات و اصطلاحات کل سلسله العربی",
                         discountAmount: 75,
-                        price: "45,000",
-                        finalPrice: "11,250",
+                        price: 45000,
+                        finalPrice: 11250,
                         thumbnailUrl:
                             "https://imgcdn.taaghche.com/frontCover/38729.jpg",
                       ),
@@ -77,8 +77,8 @@ class PublisherWriterTranslator extends StatelessWidget {
                       child: HorizontalProductCard(
                         name: "ترجمه لغات و اصطلاحات کل سلسله العربی",
                         discountAmount: 75,
-                        price: "45,000",
-                        finalPrice: "11,250",
+                        price: 45000,
+                        finalPrice: 11250,
                         thumbnailUrl:
                             "https://imgcdn.taaghche.com/frontCover/38729.jpg",
                       ),
@@ -92,8 +92,8 @@ class PublisherWriterTranslator extends StatelessWidget {
                       child: HorizontalProductCard(
                         name: "ترجمه لغات و اصطلاحات کل سلسله العربی",
                         discountAmount: 75,
-                        price: "45,000",
-                        finalPrice: "11,250",
+                        price: 45000,
+                        finalPrice: 11250,
                         thumbnailUrl:
                             "https://imgcdn.taaghche.com/frontCover/38729.jpg",
                       ),

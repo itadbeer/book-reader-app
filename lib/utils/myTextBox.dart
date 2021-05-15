@@ -8,6 +8,7 @@ class MyTextBox extends StatelessWidget {
   final Function onChanged;
   final TextInputType keyboardType;
   final int maxLength;
+  final String errorText;
 
   MyTextBox(
       {Key key,
@@ -17,7 +18,8 @@ class MyTextBox extends StatelessWidget {
       this.onEditingComplete,
       this.keyboardType,
       this.onChanged,
-      this.maxLength})
+      this.maxLength,
+      this.errorText})
       : super(key: key);
 
   @override
@@ -66,7 +68,7 @@ class MyTextBox extends StatelessWidget {
                         TextStyle(color: onSurfaceHighEmphasis, fontSize: 16),
                     hintTextDirection: TextDirection.rtl,
                     errorText: textBoxProvider.state == TextBoxState.error
-                        ? 'کد وارد شده صحیح نمی باشد'
+                        ? errorText ?? 'لطفا مقدار وارد شده را اصلاح کنید'
                         : null,
                     errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(width: 1, color: error),
