@@ -19,6 +19,7 @@ Container buildProductCard(
             border: Border.all(color: Color.fromRGBO(0, 0, 0, 0.12), width: 1),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
                 child: GestureDetector(
