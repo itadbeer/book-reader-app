@@ -66,8 +66,9 @@ class MyApp extends StatelessWidget {
           '/singleProduct': (context) => BookScreen(),
           '/categories': (context) => Categories(),
           '/category': (context) => CategoryScreen(),
-          '/publisherWriterTranslator': (context) =>
-              PublisherWriterTranslator(),
+          '/publisher': (context) => PublisherScreen(),
+          '/author': (context) => AuthorScreen(),
+          '/translator': (context) => TranslatorScreen(),
           '/login': (context) => LoginScreen(),
           '/codeVerification': (context) =>
               ChangeNotifierProvider<TextBoxProvider>(

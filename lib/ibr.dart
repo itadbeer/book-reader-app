@@ -29,7 +29,9 @@ export 'package:ibr/providers/buttonProvider.dart';
 export 'package:ibr/providers/timerProvider.dart';
 
 // Screens
-export 'package:ibr/screens/publisherWriterTranslator.dart';
+export 'package:ibr/screens/publisher/publisher.dart';
+export 'package:ibr/screens/author/author.dart';
+export 'package:ibr/screens/translator/translator.dart';
 export 'package:ibr/screens/discovery/discovery.dart';
 export 'package:ibr/screens/category/categories.dart';
 export 'package:ibr/screens/category/category.dart';
@@ -47,8 +49,10 @@ export 'package:ibr/utils/option.dart';
 export 'package:ibr/utils/button.dart';
 export 'package:ibr/utils/customSearchDelegate.dart';
 export 'package:ibr/utils/myTextBox.dart';
+export 'package:ibr/utils/loadingDialog.dart';
 
 enum DownloadStatus { downloaded, downloading, normal }
+
 // API configurations
 String endpoint = "http://127.0.0.1:7000/";
 Map<String, String> headers = {
