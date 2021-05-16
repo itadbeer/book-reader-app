@@ -9,6 +9,15 @@ export 'package:http/http.dart';
 export 'dart:convert';
 export 'package:get_storage/get_storage.dart';
 
+// API functions
+export 'package:ibr/api/author.dart';
+export 'package:ibr/api/books.dart';
+export 'package:ibr/api/category.dart';
+export 'package:ibr/api/codeVerification.dart';
+export 'package:ibr/api/login.dart';
+export 'package:ibr/api/publisher.dart';
+export 'package:ibr/api/translator.dart';
+
 // Functions
 export 'package:ibr/functions/validation.dart';
 export 'package:ibr/functions/authentication.dart';
@@ -24,7 +33,7 @@ export 'package:ibr/screens/publisherWriterTranslator.dart';
 export 'package:ibr/screens/discovery/discovery.dart';
 export 'package:ibr/screens/category/categories.dart';
 export 'package:ibr/screens/category/category.dart';
-export 'package:ibr/screens/product/singleProduct.dart';
+export 'package:ibr/screens/book/book.dart';
 export 'package:ibr/screens/login/login.dart';
 export 'package:ibr/screens/login/codeVerification.dart';
 export 'package:ibr/screens/account/account.dart';

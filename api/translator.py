@@ -1,3 +1,4 @@
+import pdb
 import db
 from typing import List, Any, Dict
 
@@ -53,7 +54,9 @@ class Translator:
             db.cursor.execute(query,(translator_id,))
             translator: List[Any] = db.cursor.fetchone()
         except db.Error as error:
+            print(error)
             return translator_dict
+            print(translator)
         translator_dict = {'id': translator[0], 'name': translator[1], 'description': translator[2]}
         return translator_dict
 

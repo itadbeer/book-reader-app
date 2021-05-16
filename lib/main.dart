@@ -1,10 +1,12 @@
+import 'package:ibr/api/author.dart';
+import 'package:ibr/api/translator.dart';
+import 'package:ibr/models/author.dart';
 import 'package:ibr/models/book.dart';
 import 'package:ibr/models/category.dart';
+import 'package:ibr/models/publisher.dart';
+import 'package:ibr/models/translator.dart';
 import 'package:ibr/providers/searchFieldHandler.dart';
 import 'package:ibr/ibr.dart';
-
-import 'api/books.dart';
-import 'api/categories.dart';
 
 void main() async {
   await GetStorage.init();
@@ -28,9 +30,21 @@ class MyApp extends StatelessWidget {
           initialData: [],
           create: (_) => getBooks(limit: 10),
         ),
+        FutureProvider<List<Author>>(
+          initialData: [],
+          create: (_) => getAllAuthors(),
+        ),
         FutureProvider<List<Category>>(
           initialData: [],
-          create: (_) => getCategories(limit: 0),
+          create: (_) => getAllCategories(),
+        ),
+        FutureProvider<List<Translator>>(
+          initialData: [],
+          create: (_) => getAllTranslators(),
+        ),
+        FutureProvider<List<Publisher>>(
+          initialData: [],
+          create: (_) => getAllPublishers(),
         ),
       ],
       child: MaterialApp(
@@ -49,7 +63,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => Discovery(),
-          '/singleProduct': (context) => SingleProduct(),
+          '/singleProduct': (context) => BookScreen(),
           '/categories': (context) => Categories(),
           '/category': (context) => CategoryScreen(),
           '/publisherWriterTranslator': (context) =>

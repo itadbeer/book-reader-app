@@ -1,10 +1,84 @@
 import 'package:ibr/ibr.dart';
-import 'package:ibr/screens/product/widgets/footerPurchaseBar.dart';
-import 'package:ibr/screens/product/widgets/purchaseConfirmation.dart';
+import 'package:ibr/models/author.dart';
+import 'package:ibr/models/book.dart';
+import 'package:ibr/models/category.dart';
+import 'package:ibr/models/publisher.dart';
+import 'package:ibr/models/translator.dart';
+import 'package:ibr/screens/book/widgets/footerPurchaseBar.dart';
+import 'package:ibr/screens/book/widgets/purchaseConfirmation.dart';
 
-class SingleProduct extends StatelessWidget {
+class BookScreen extends StatelessWidget {
+  getAuthorsInfo(context, Book book) {
+    List<Widget> authors = [];
+    for (var authorId in book.authorId) {
+      Author author = getAuthor(context, authorId: authorId);
+      authors.add(GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/author', arguments: author);
+        },
+        child: Text(
+            "${author.name}${authorId != book.authorId.last ? '،' : ''}",
+            style: TextStyle(color: myTheme.primaryColor, fontSize: 16)),
+      ));
+    }
+    return Row(children: authors);
+  }
+
+  getTranslatorsInfo(BuildContext context, Book book) {
+    List<Widget> translators = [];
+    for (var translatorId in book.translatorId) {
+      Translator translator =
+          getTranslator(context, translatorId: translatorId);
+      translators.add(GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/translator', arguments: translator);
+        },
+        child: Text(
+            "${translator.name}${translatorId != book.translatorId.last ? '،' : ''}",
+            style: TextStyle(color: myTheme.primaryColor, fontSize: 16)),
+      ));
+    }
+    return Row(children: translators);
+  }
+
+  getCategoriesInfo(context, Book book) {
+    List<Widget> categories = [];
+    Category category;
+    for (int theCategoryId in book.categoryId) {
+      category = getCategory(context, categoryId: theCategoryId);
+      categories.add(GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/category', arguments: category);
+        },
+        child: Text(
+            "${category.name}${theCategoryId != book.categoryId.last ? '،' : ''}",
+            style: TextStyle(color: myTheme.primaryColor, fontSize: 16)),
+      ));
+    }
+    return Row(children: categories);
+  }
+
+  getPublishersInfo(BuildContext context, Book book) {
+    List<Widget> publishers = [];
+    for (var publisherId in book.publisherId) {
+      Publisher publisher = getPublisher(context, publisherId: publisherId);
+      publishers.add(GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/publisher', arguments: publisher);
+        },
+        child: Text(
+            "${publisher.name}${publisherId != book.publisherId.last ? '،' : ''}",
+            style: TextStyle(color: myTheme.primaryColor, fontSize: 16)),
+      ));
+    }
+    return Row(children: publishers);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Book book = ModalRoute.of(context).settings.arguments;
+    final String finalPrice =
+        ((book.price / 100) * (100 - book.discountPercentage)).toString();
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -14,10 +88,11 @@ class SingleProduct extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
                 child: Image.network(
-                  'https://imgcdn.taaghche.com/frontCover/38729.jpg',
+                  book.image,
                   height: 288,
                   width: MediaQuery.of(context).size.width,
                 ),
@@ -25,7 +100,7 @@ class SingleProduct extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(top: 24, bottom: 24),
                 child: Text(
-                  "ترجمه لغات و اصطلاحات کل سلسله العربیة بین یدیک",
+                  book.name,
                   style: TextStyle(
                       fontSize: 20,
                       color: onSurfaceHighEmphasis,
@@ -34,37 +109,42 @@ class SingleProduct extends StatelessWidget {
               ),
               Row(
                 children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(left: 8),
-                    width: 32,
-                    height: 22.0,
-                    color: Colors.transparent,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: myTheme.primaryColor,
-                          borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                      child: Center(
-                        child: Text(
-                          "75%",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: 8, left: 8),
-                    child: Text("45,000",
-                        style: TextStyle(
-                            color: onSurfaceMediumEmphasis,
-                            decoration: TextDecoration.lineThrough,
-                            fontSize: 14)),
-                  ),
+                  book.discountPercentage > 0
+                      ? Container(
+                          margin: EdgeInsets.only(left: 8),
+                          width: 32,
+                          height: 22.0,
+                          color: Colors.transparent,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: myTheme.primaryColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0))),
+                            child: Center(
+                              child: Text(
+                                "${book.discountPercentage}%",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                        )
+                      : Container(),
+                  book.discountPercentage > 0
+                      ? Container(
+                          margin: EdgeInsets.only(right: 8, left: 8),
+                          child: Text(book.price.toString(),
+                              style: TextStyle(
+                                  color: onSurfaceMediumEmphasis,
+                                  decoration: TextDecoration.lineThrough,
+                                  fontSize: 14)),
+                        )
+                      : Container(),
                   RichText(
                       text: TextSpan(
-                          text: "11,250",
+                          text: finalPrice,
                           style: TextStyle(
                               color: myTheme.primaryColor,
                               fontSize: 14,
@@ -112,9 +192,7 @@ class SingleProduct extends StatelessWidget {
                       Text("نویسنده: ",
                           style: TextStyle(
                               color: onSurfaceMediumEmphasis, fontSize: 16)),
-                      Text("نام نویسنده",
-                          style: TextStyle(
-                              color: myTheme.primaryColor, fontSize: 16)),
+                      getAuthorsInfo(context, book),
                     ],
                   ),
                   Row(
@@ -122,9 +200,7 @@ class SingleProduct extends StatelessWidget {
                       Text("مترجم: ",
                           style: TextStyle(
                               color: onSurfaceMediumEmphasis, fontSize: 16)),
-                      Text("نام مترجم",
-                          style: TextStyle(
-                              color: myTheme.primaryColor, fontSize: 16)),
+                      getTranslatorsInfo(context, book),
                     ],
                   ),
                   Row(
@@ -132,9 +208,7 @@ class SingleProduct extends StatelessWidget {
                       Text("ناشر: ",
                           style: TextStyle(
                               color: onSurfaceMediumEmphasis, fontSize: 16)),
-                      Text("نام ناشر",
-                          style: TextStyle(
-                              color: myTheme.primaryColor, fontSize: 16)),
+                      getPublishersInfo(context, book),
                     ],
                   ),
                   Row(
@@ -142,7 +216,7 @@ class SingleProduct extends StatelessWidget {
                       Text("سال نشر: ",
                           style: TextStyle(
                               color: onSurfaceMediumEmphasis, fontSize: 16)),
-                      Text("1399",
+                      Text(book.publishDate,
                           style: TextStyle(
                               color: onSurfaceHighEmphasis, fontSize: 16)),
                     ],
@@ -152,7 +226,7 @@ class SingleProduct extends StatelessWidget {
                       Text("تعداد صفحات: ",
                           style: TextStyle(
                               color: onSurfaceMediumEmphasis, fontSize: 16)),
-                      Text("274",
+                      Text(book.pagesCount.toString(),
                           style: TextStyle(
                               color: onSurfaceHighEmphasis, fontSize: 16)),
                     ],
@@ -162,40 +236,13 @@ class SingleProduct extends StatelessWidget {
                       Text("دسته بندی ها: ",
                           style: TextStyle(
                               color: onSurfaceMediumEmphasis, fontSize: 16)),
-                      TextButton(
-                        style: ButtonStyle(
-                            overlayColor: MaterialStateColor.resolveWith(
-                                (states) => Colors.transparent)),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/category');
-                        },
-                        child: Text("دسته بندی",
-                            style: TextStyle(
-                                color: myTheme.primaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal)),
-                      ),
-                      Text("، ",
-                          style: TextStyle(
-                              color: onSurfaceMediumEmphasis, fontSize: 16)),
-                      TextButton(
-                        style: ButtonStyle(
-                            overlayColor: MaterialStateColor.resolveWith(
-                                (states) => Colors.transparent)),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/category');
-                        },
-                        child: Text("دسته بندی",
-                            style: TextStyle(
-                                color: myTheme.primaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.normal)),
-                      ),
+                      getCategoriesInfo(context, book),
                     ],
                   ),
                 ],
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Align(
                     alignment: Alignment.topRight,
@@ -210,8 +257,7 @@ class SingleProduct extends StatelessWidget {
                   ),
                   Container(
                       margin: EdgeInsets.only(bottom: 56),
-                      child: Text(
-                          "این یک متن مثلا طولانی دربارۀ این کتاب است به نظر متن زیبایی می‌آید امیدوارم از خواندن آن لذت ببرید من که قطعا نوشتنش را دوست دارم",
+                      child: Text(book.description,
                           style: TextStyle(
                               color: onSurfaceMediumEmphasis, fontSize: 16)))
                 ],
@@ -220,7 +266,8 @@ class SingleProduct extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: FooterPurchaseBar(),
+      bottomNavigationBar:
+          FooterPurchaseBar(book: book, finalPrice: finalPrice),
     );
   }
 }

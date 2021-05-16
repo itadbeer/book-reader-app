@@ -3,9 +3,9 @@ import 'package:ibr/ibr.dart';
 import 'package:ibr/models/book.dart';
 import 'package:ibr/utils/loadingDialog.dart';
 
-Container buildProductCard(
-    BuildContext context, title, discountAmount, price, thumbnailUrl) {
-  final String finalPrice = ((price / 100) * (100 - discountAmount)).toString();
+Container showBookCard(BuildContext context, Book book) {
+  final String finalPrice =
+      ((book.price / 100) * (100 - book.discountPercentage)).toString();
   return Container(
     width: 150,
     margin: EdgeInsets.only(left: 8, top: 16),
@@ -23,28 +23,34 @@ Container buildProductCard(
             children: <Widget>[
               Container(
                 child: GestureDetector(
-                  onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
+                  onTap: () => {
+                    Navigator.pushNamed(context, '/singleProduct',
+                        arguments: book)
+                  },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: CachedNetworkImage(
                       // placeholder: (context, url) =>
                       //     CachedNetworkImage(imageUrl: ""),
-                      imageUrl: thumbnailUrl,
+                      imageUrl: book.image,
                       height: 192,
                     ),
                   ),
                 ),
               ),
               GestureDetector(
-                onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
-                child: Text(title,
+                onTap: () => {
+                  Navigator.pushNamed(context, '/singleProduct',
+                      arguments: book)
+                },
+                child: Text(book.name,
                     style: TextStyle(fontSize: 14, color: Colors.black)),
               ),
               Container(
                 padding: EdgeInsets.only(top: 8, bottom: 8),
                 child: Row(
                   children: [
-                    discountAmount > 0
+                    book.discountPercentage > 0
                         ? Column(
                             children: <Widget>[
                               Container(
@@ -59,7 +65,7 @@ Container buildProductCard(
                                             Radius.circular(8.0))),
                                     child: Center(
                                       child: Text(
-                                        "$discountAmount%",
+                                        "${book.discountPercentage}%",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 14,
@@ -74,10 +80,10 @@ Container buildProductCard(
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        discountAmount > 0
+                        book.discountPercentage > 0
                             ? Row(
                                 children: [
-                                  Text(price.toString(),
+                                  Text(book.price.toString(),
                                       style: TextStyle(
                                           color: onSurfaceMediumEmphasis,
                                           decoration:
@@ -140,8 +146,7 @@ class BooksRow extends StatelessWidget {
   Row showRecentBooks(BuildContext context, List<Book> books) {
     List<Widget> booksWidgets = [];
     books.forEach((book) {
-      booksWidgets.add(buildProductCard(
-          context, book.name, book.discountPercentage, book.price, book.image));
+      booksWidgets.add(showBookCard(context, book));
     });
     return Row(children: booksWidgets);
   }
@@ -163,8 +168,7 @@ class BooksRow extends StatelessWidget {
               );
             else {
               snapshot.data.forEach((book) {
-                booksWidgets.add(buildProductCard(context, book.name,
-                    book.discountPercentage, book.price, book.image));
+                booksWidgets.add(showBookCard(context, book));
               });
               return Row(children: booksWidgets);
             }

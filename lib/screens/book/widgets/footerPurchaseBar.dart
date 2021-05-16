@@ -1,9 +1,14 @@
 import 'package:ibr/ibr.dart';
-import 'package:ibr/screens/product/widgets/purchaseConfirmation.dart';
+import 'package:ibr/models/book.dart';
+import 'package:ibr/screens/book/widgets/purchaseConfirmation.dart';
 
 class FooterPurchaseBar extends StatelessWidget {
+  final Book book;
+  final String finalPrice;
   const FooterPurchaseBar({
     Key key,
+    this.book,
+    this.finalPrice,
   }) : super(key: key);
 
   @override
@@ -23,36 +28,41 @@ class FooterPurchaseBar extends StatelessWidget {
           children: <Widget>[
             Row(
               children: [
-                Container(
-                  margin: EdgeInsets.only(left: 8),
-                  width: 32,
-                  height: 22.0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: myTheme.primaryColor,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0))),
-                    child: Center(
-                      child: Text(
-                        "75%",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(right: 8, left: 8),
-                  child: Text("45,000",
-                      style: TextStyle(
-                          color: onSurfaceMediumEmphasis,
-                          decoration: TextDecoration.lineThrough,
-                          fontSize: 14)),
-                ),
+                book.discountPercentage > 0
+                    ? Container(
+                        margin: EdgeInsets.only(left: 8),
+                        width: 32,
+                        height: 22.0,
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: myTheme.primaryColor,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8.0))),
+                          child: Center(
+                            child: Text(
+                              "${book.discountPercentage}%",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(),
+                book.discountPercentage > 0
+                    ? Container(
+                        margin: EdgeInsets.only(right: 8, left: 8),
+                        child: Text(book.price.toString(),
+                            style: TextStyle(
+                                color: onSurfaceMediumEmphasis,
+                                decoration: TextDecoration.lineThrough,
+                                fontSize: 14)),
+                      )
+                    : Container(),
                 RichText(
                     text: TextSpan(
-                        text: "11,250",
+                        text: finalPrice,
                         style: TextStyle(
                             color: myTheme.primaryColor,
                             fontSize: 14,

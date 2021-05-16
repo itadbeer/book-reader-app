@@ -1,6 +1,5 @@
 import 'package:ibr/api/books.dart';
 import 'package:test/test.dart';
-import 'package:ibr/api/categories.dart';
 import 'package:ibr/api/category.dart';
 
 void main() {
@@ -23,15 +22,6 @@ void main() {
         ]
     }""";
     expect(parseCategories(jsonStr).first.id, 1);
-  });
-  test('parses a single category', () {
-    const jsonStr = """
-      {
-        "id": 1,
-        "name": "فقه"
-      }
-    """;
-    expect(parseCategory(jsonStr).id, 1);
   });
 
   test('parses books', () {

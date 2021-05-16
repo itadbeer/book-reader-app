@@ -1,4 +1,4 @@
-import 'package:ibr/api/categories.dart';
+import 'package:ibr/api/category.dart';
 import 'package:ibr/models/book.dart';
 import 'package:ibr/models/category.dart';
 import 'package:test/test.dart';
@@ -11,7 +11,7 @@ void main() {
   });
 
   test("get categories from api", () async {
-    List<Category> categories = await getCategories();
+    List<Category> categories = await getAllCategories();
     expect(categories.first.id, 1);
   });
 }

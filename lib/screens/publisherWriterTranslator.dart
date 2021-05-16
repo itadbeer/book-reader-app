@@ -1,5 +1,5 @@
 import 'package:ibr/ibr.dart';
-import 'package:ibr/screens/product/widgets/horizontalProductCard.dart';
+import 'package:ibr/screens/book/widgets/horizontalProductCard.dart';
 
 class PublisherWriterTranslator extends StatelessWidget {
   @override
