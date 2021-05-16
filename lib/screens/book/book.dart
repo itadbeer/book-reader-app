@@ -6,6 +6,7 @@ import 'package:ibr/models/publisher.dart';
 import 'package:ibr/models/translator.dart';
 import 'package:ibr/screens/book/widgets/footerPurchaseBar.dart';
 import 'package:ibr/screens/book/widgets/purchaseConfirmation.dart';
+import 'package:intl/intl.dart';
 
 class BookScreen extends StatelessWidget {
   getAuthorsInfo(context, Book book) {
@@ -77,8 +78,10 @@ class BookScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Book book = ModalRoute.of(context).settings.arguments;
-    final String finalPrice =
-        ((book.price / 100) * (100 - book.discountPercentage)).toString();
+    var money =
+        NumberFormat.currency(locale: "en_US", symbol: "", decimalDigits: 0);
+    final double finalPrice =
+        (book.price / 100) * (100 - book.discountPercentage);
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -144,7 +147,7 @@ class BookScreen extends StatelessWidget {
                       : Container(),
                   RichText(
                       text: TextSpan(
-                          text: finalPrice,
+                          text: money.format(finalPrice),
                           style: TextStyle(
                               color: myTheme.primaryColor,
                               fontSize: 14,
@@ -267,7 +270,7 @@ class BookScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar:
-          FooterPurchaseBar(book: book, finalPrice: finalPrice),
+          FooterPurchaseBar(book: book, finalPrice: money.format(finalPrice)),
     );
   }
 }

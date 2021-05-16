@@ -1,11 +1,13 @@
 import 'package:ibr/api/books.dart';
 import 'package:ibr/ibr.dart';
 import 'package:ibr/models/book.dart';
-import 'package:ibr/utils/loadingDialog.dart';
+import 'package:intl/intl.dart';
 
 Container showBookCard(BuildContext context, Book book) {
-  final String finalPrice =
-      ((book.price / 100) * (100 - book.discountPercentage)).toString();
+  var money =
+      NumberFormat.currency(locale: "en_US", symbol: "", decimalDigits: 0);
+  final double finalPrice =
+      (book.price / 100) * (100 - book.discountPercentage);
   return Container(
     width: 150,
     margin: EdgeInsets.only(left: 8, top: 16),
@@ -83,7 +85,7 @@ Container showBookCard(BuildContext context, Book book) {
                         book.discountPercentage > 0
                             ? Row(
                                 children: [
-                                  Text(book.price.toString(),
+                                  Text(money.format(book.price),
                                       style: TextStyle(
                                           color: onSurfaceMediumEmphasis,
                                           decoration:
@@ -96,7 +98,7 @@ Container showBookCard(BuildContext context, Book book) {
                           children: [
                             RichText(
                                 text: TextSpan(
-                                    text: finalPrice,
+                                    text: money.format(finalPrice),
                                     style: TextStyle(
                                         color: myTheme.primaryColor,
                                         fontSize: 14,

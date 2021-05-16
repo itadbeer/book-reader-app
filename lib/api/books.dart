@@ -9,10 +9,13 @@ List<Book> parseBooks(String jsonStr) {
   return books;
 }
 
-Future<List<Book>> getBooks({int limit = 0, int categoryId}) async {
+Future<List<Book>> getBooks(
+    {int limit = 0, int categoryId, int publisherId}) async {
   String query = "?limit=$limit";
   if (categoryId != null) {
     query += "&category_id=$categoryId";
+  } else if (publisherId != null) {
+    query += "&publisher_id=$publisherId";
   }
   Response response =
       await get(Uri.parse(endpoint + "book/all" + query), headers: headers);
