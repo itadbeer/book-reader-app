@@ -136,7 +136,7 @@ class BooksRow extends StatelessWidget {
             // Display recent Books
             categoryId == null
                 ? showRecentBooks(context, recentBooks)
-                : showCategoryBook(context, categoryId)
+                : showCategoryBooks(context, categoryId)
           ],
         ),
       )
@@ -151,7 +151,7 @@ class BooksRow extends StatelessWidget {
     return Row(children: booksWidgets);
   }
 
-  showCategoryBook(BuildContext context, int categorId) {
+  showCategoryBooks(BuildContext context, int categorId) {
     // get 10 recent books for this specific category
     List<Widget> booksWidgets = [];
     return FutureBuilder(
