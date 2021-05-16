@@ -24,7 +24,7 @@ class Discovery extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 showSearchBar(context),
-                BooksRow(title: "آخرین ها"),
+                BooksRow(title: "آخرین ها", category: Category()),
                 ...showCategoryRows(categories),
                 SizedBox(height: 88)
               ],
@@ -51,7 +51,7 @@ class Discovery extends StatelessWidget {
   List<Widget> showCategoryRows(List<Category> categories) {
     List<Widget> rows = [];
     categories.forEach((category) async {
-      rows.add(BooksRow(title: category.name, categoryId: category.id));
+      rows.add(BooksRow(title: category.name, category: category));
     });
     return rows;
   }

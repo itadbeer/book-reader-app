@@ -1,6 +1,7 @@
 import 'package:ibr/api/books.dart';
 import 'package:ibr/ibr.dart';
 import 'package:ibr/models/book.dart';
+import 'package:ibr/models/category.dart';
 import 'package:intl/intl.dart';
 
 Container showBookCard(BuildContext context, Book book) {
@@ -124,21 +125,30 @@ Container showBookCard(BuildContext context, Book book) {
 
 class BooksRow extends StatelessWidget {
   final String title;
-  final int categoryId;
-  const BooksRow({Key key, this.title, this.categoryId}) : super(key: key);
+  final Category category;
+  const BooksRow({Key key, this.title, this.category}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     List<Book> recentBooks = Provider.of<List<Book>>(context);
     return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-      BooksRowHeader(title: title),
+      BooksRowHeader(
+          title: title,
+          moreButtonAction: category.id == null
+              ? () {
+                  Navigator.pushNamed(context, '/allBooks');
+                }
+              : () {
+                  Navigator.pushNamed(context, '/category',
+                      arguments: category);
+                }),
       SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
             // Display recent Books
-            categoryId == null
+            category.id == null
                 ? showRecentBooks(context, recentBooks)
-                : showCategoryBooks(context, categoryId)
+                : showCategoryBooks(context, category.id)
           ],
         ),
       )
@@ -157,7 +167,7 @@ class BooksRow extends StatelessWidget {
     // get 10 recent books for this specific category
     List<Widget> booksWidgets = [];
     return FutureBuilder(
-      future: getBooks(limit: 10, categoryId: categoryId), // async work
+      future: getBooks(limit: 10, categoryId: category.id), // async work
       builder: (BuildContext context, AsyncSnapshot<List<Book>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
@@ -182,9 +192,11 @@ class BooksRow extends StatelessWidget {
 
 class BooksRowHeader extends StatelessWidget {
   final String title;
+  final Function moreButtonAction;
   const BooksRowHeader({
     Key key,
     this.title,
+    this.moreButtonAction,
   }) : super(key: key);
 
   @override
@@ -200,8 +212,11 @@ class BooksRowHeader extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.w500)),
           Spacer(),
-          Text('نمایش بیشتر',
-              style: TextStyle(color: myTheme.primaryColor, fontSize: 14)),
+          GestureDetector(
+            onTap: moreButtonAction,
+            child: Text('نمایش بیشتر',
+                style: TextStyle(color: myTheme.primaryColor, fontSize: 14)),
+          ),
           Icon(Icons.chevron_right, color: myTheme.primaryColor)
         ],
       ),
