@@ -14,6 +14,13 @@ getCategory(BuildContext context, {int categoryId}) {
       .firstWhere((Category category) => category.id == categoryId);
 }
 
+List<Category> searchCategory(BuildContext context, {String categoryName}) {
+  final categories = Provider.of<List<Category>>(context);
+  return categories
+      .where((Category category) => category.name.contains(categoryName))
+      .toList();
+}
+
 Future<List<Category>> getAllCategories({int limit = 0}) async {
   Response response = await get(
       Uri.parse(endpoint + "category/all?limit=$limit"),

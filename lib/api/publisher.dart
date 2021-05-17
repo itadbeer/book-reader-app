@@ -14,6 +14,13 @@ getPublisher(BuildContext context, {int publisherId}) {
       .firstWhere((Publisher publisher) => publisher.id == publisherId);
 }
 
+List<Publisher> searchPublisher(BuildContext context, {String publisherName}) {
+  final publishers = Provider.of<List<Publisher>>(context);
+  return publishers
+      .where((Publisher publisher) => publisher.name.contains(publisherName))
+      .toList();
+}
+
 Future<List<Publisher>> getAllPublishers({int limit = 0}) async {
   Response response = await get(
       Uri.parse(endpoint + "publisher/all?limit=$limit"),

@@ -14,6 +14,15 @@ getTranslator(BuildContext context, {int translatorId}) {
       .firstWhere((Translator translator) => translator.id == translatorId);
 }
 
+List<Translator> searchTranslator(BuildContext context,
+    {String translatorName}) {
+  final translators = Provider.of<List<Translator>>(context);
+  return translators
+      .where(
+          (Translator translator) => translator.name.contains(translatorName))
+      .toList();
+}
+
 Future<List<Translator>> getAllTranslators({int limit = 0}) async {
   Response response = await get(
       Uri.parse(endpoint + "translator/all?limit=$limit"),

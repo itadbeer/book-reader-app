@@ -13,6 +13,13 @@ getAuthor(BuildContext context, {int authorId}) {
   return authors.firstWhere((Author author) => author.id == authorId);
 }
 
+List<Author> searchAuthor(BuildContext context, {String authorName}) {
+  final authors = Provider.of<List<Author>>(context);
+  return authors
+      .where((Author author) => author.name.contains(authorName))
+      .toList();
+}
+
 Future<List<Author>> getAllAuthors() async {
   Response response =
       await get(Uri.parse(endpoint + "author/all"), headers: headers);
