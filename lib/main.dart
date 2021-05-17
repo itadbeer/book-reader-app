@@ -46,6 +46,9 @@ class MyApp extends StatelessWidget {
           initialData: [],
           create: (_) => getAllPublishers(),
         ),
+        ChangeNotifierProvider<BookProvider>(
+          create: (context) => BookProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -64,6 +67,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => Discovery(),
           '/singleProduct': (context) => BookScreen(),
+          '/books': (context) => BooksScreen(),
           '/categories': (context) => Categories(),
           '/category': (context) => CategoryScreen(),
           '/publisher': (context) => PublisherScreen(),

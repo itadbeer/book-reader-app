@@ -27,6 +27,7 @@ export 'package:ibr/providers/userHandler.dart';
 export 'package:ibr/providers/textBoxProvider.dart';
 export 'package:ibr/providers/buttonProvider.dart';
 export 'package:ibr/providers/timerProvider.dart';
+export 'package:ibr/providers/bookProvider.dart';
 
 // Screens
 export 'package:ibr/screens/publisher/publisher.dart';
@@ -36,6 +37,7 @@ export 'package:ibr/screens/discovery/discovery.dart';
 export 'package:ibr/screens/category/categories.dart';
 export 'package:ibr/screens/category/category.dart';
 export 'package:ibr/screens/book/book.dart';
+export 'package:ibr/screens/book/books.dart';
 export 'package:ibr/screens/login/login.dart';
 export 'package:ibr/screens/login/codeVerification.dart';
 export 'package:ibr/screens/account/account.dart';

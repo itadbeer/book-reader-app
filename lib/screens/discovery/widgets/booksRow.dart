@@ -135,7 +135,7 @@ class BooksRow extends StatelessWidget {
           title: title,
           moreButtonAction: category.id == null
               ? () {
-                  Navigator.pushNamed(context, '/allBooks');
+                  Navigator.pushNamed(context, '/books');
                 }
               : () {
                   Navigator.pushNamed(context, '/category',
