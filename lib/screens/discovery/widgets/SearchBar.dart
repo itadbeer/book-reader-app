@@ -30,6 +30,8 @@ class SearchBar extends StatelessWidget {
             searchHandler.setCharLength(_searchController.text.length);
           },
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(0),
+            alignLabelWithHint: true,
             filled: true,
             fillColor: Color.fromRGBO(0, 0, 0, 0.04),
             labelStyle: TextStyle(color: onSurfaceHighEmphasis, fontSize: 16),
