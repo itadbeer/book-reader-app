@@ -1,4 +1,5 @@
 import 'package:ibr/ibr.dart';
+import 'package:ibr/models/book.dart';
 import 'package:ibr/screens/discovery/widgets/searchBar.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
@@ -29,6 +30,7 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   List<Widget> buildActions(BuildContext context) {
+    final TextEditingController _searchController = TextEditingController();
     return [
       IconButton(
           icon: Icon(
@@ -43,11 +45,12 @@ class CustomSearchDelegate extends SearchDelegate {
         child: Container(
             margin: EdgeInsets.fromLTRB(16, 8, 0, 8),
             child: SearchBar(
+              searchController: _searchController,
               enabled: true,
               width: 318,
               height: 40,
               onSubmitted: () {
-                query = "متن تستی جدید";
+                query = _searchController.text;
               },
             )),
       )
@@ -73,83 +76,149 @@ class CustomSearchDelegate extends SearchDelegate {
             scrollDirection: Axis.vertical,
             child: Container(
                 child: Column(children: [
-              Option(
-                children: [
-                  Column(
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(16, 4, 16, 4),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: CachedNetworkImage(
-                            imageUrl:
-                                'https://imgcdn.taaghche.com/frontCover/38729.jpg',
-                            width: 36,
-                            height: 48,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.symmetric(vertical: 16),
-                          child: Text(
-                            query,
-                            style: TextStyle(
-                                color: onSurfaceMediumEmphasis,
-                                fontSize: 16,
-                                height: 1.56),
-                            overflow: TextOverflow.clip,
-                          ),
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-              Option(
-                padding: EdgeInsets.all(16),
-                children: [
-                  Text("دسته بندی: $query",
-                      style: TextStyle(
-                          color: onSurfaceMediumEmphasis,
-                          fontSize: 16,
-                          height: 1.5))
-                ],
-              ),
-              Option(
-                padding: EdgeInsets.all(16),
-                children: [
-                  Text("نویسنده: $query",
-                      style: TextStyle(
-                          color: onSurfaceMediumEmphasis,
-                          fontSize: 16,
-                          height: 1.5))
-                ],
-              ),
-              Option(
-                padding: EdgeInsets.all(16),
-                children: [
-                  Text("مترجم: $query",
-                      style: TextStyle(
-                          color: onSurfaceMediumEmphasis,
-                          fontSize: 16,
-                          height: 1.5))
-                ],
-              ),
-              Option(
-                padding: EdgeInsets.all(16),
-                children: [
-                  Text("ناشر: $query",
-                      style: TextStyle(
-                          color: onSurfaceMediumEmphasis,
-                          fontSize: 16,
-                          height: 1.5))
-                ],
-              ),
+              showMatchedBooks(context),
+              ...showMatchedCategories(context),
+              ...showMatchedAuthors(context),
+              ...showMatchedTranslators(context),
+              ...showMatchedPublishers(context),
             ]))));
+  }
+
+  showMatchedBooks(BuildContext context) {
+    List<Widget> options = [];
+
+    return FutureBuilder(
+        future: searchBook(context, bookName: query),
+        builder: (BuildContext context, AsyncSnapshot<List<Book>> results) {
+          switch (results.connectionState) {
+            case ConnectionState.waiting:
+              return LoadingDialog();
+            default:
+              if (results.hasError)
+                return Text(
+                  'مشکلی رخ داده',
+                  style: TextStyle(color: error),
+                );
+              else {
+                if (results.data.length > 0) {
+                  results.data.forEach((book) {
+                    options.add(Option(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.fromLTRB(16, 4, 16, 4),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(4),
+                                child: CachedNetworkImage(
+                                  imageUrl: book.image,
+                                  width: 36,
+                                  height: 48,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                margin: EdgeInsets.symmetric(vertical: 16),
+                                child: Text(
+                                  book.name,
+                                  style: TextStyle(
+                                      color: onSurfaceMediumEmphasis,
+                                      fontSize: 16,
+                                      height: 1.56),
+                                  overflow: TextOverflow.clip,
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ));
+                  });
+                }
+              }
+              return Column(children: options);
+          }
+        });
+  }
+
+  showMatchedAuthors(BuildContext context) {
+    final results = searchAuthor(context, authorName: query);
+    List<Widget> options = [];
+    if (results.length > 0) {
+      results.forEach((match) {
+        options.add(Option(
+          padding: EdgeInsets.all(16),
+          children: [
+            Text("نویسنده: ${match.name}",
+                style: TextStyle(
+                    color: onSurfaceMediumEmphasis, fontSize: 16, height: 1.5))
+          ],
+        ));
+      });
+      return options;
+    }
+    return [Container()];
+  }
+
+  showMatchedCategories(BuildContext context) {
+    final results = searchCategory(context, categoryName: query);
+    List<Widget> options = [];
+    if (results.length > 0) {
+      results.forEach((match) {
+        options.add(Option(
+          padding: EdgeInsets.all(16),
+          children: [
+            Text("دسته بندی: ${match.name}",
+                style: TextStyle(
+                    color: onSurfaceMediumEmphasis, fontSize: 16, height: 1.5))
+          ],
+        ));
+      });
+      return options;
+    }
+    return [Container()];
+  }
+
+  showMatchedTranslators(BuildContext context) {
+    final results = searchTranslator(context, translatorName: query);
+    List<Widget> options = [];
+    if (results.length > 0) {
+      results.forEach((match) {
+        options.add(Option(
+          padding: EdgeInsets.all(16),
+          children: [
+            Text("مترجم: ${match.name}",
+                style: TextStyle(
+                    color: onSurfaceMediumEmphasis, fontSize: 16, height: 1.5))
+          ],
+        ));
+      });
+      return options;
+    }
+    return [Container()];
+  }
+
+  showMatchedPublishers(BuildContext context) {
+    final results = searchPublisher(context, publisherName: query);
+    List<Widget> options = [];
+    if (results.length > 0) {
+      results.forEach((match) {
+        options.add(Option(
+          padding: EdgeInsets.all(16),
+          children: [
+            Text("ناشر: ${match.name}",
+                style: TextStyle(
+                    color: onSurfaceMediumEmphasis, fontSize: 16, height: 1.5))
+          ],
+        ));
+      });
+      return options;
+    }
+    return [Container()];
   }
 }

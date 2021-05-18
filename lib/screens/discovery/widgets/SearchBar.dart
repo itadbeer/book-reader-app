@@ -6,16 +6,16 @@ class SearchBar extends StatelessWidget {
   final double height;
   final double width;
   final bool enabled;
-
+  final TextEditingController searchController;
   SearchBar({
     Key key,
     this.height,
     this.width,
     this.enabled,
     this.onSubmitted,
+    this.searchController,
   }) : super(key: key);
 
-  final _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final searchHandler = Provider.of<SearchHandler>(context);
@@ -23,11 +23,12 @@ class SearchBar extends StatelessWidget {
         width: width ?? MediaQuery.of(context).size.width - 32,
         height: height ?? 56,
         child: TextField(
-          controller: _searchController,
+          controller: searchController,
           onEditingComplete: onSubmitted ?? () {},
           enabled: enabled,
           onChanged: (String value) {
-            searchHandler.setCharLength(_searchController.text.length);
+            // searchHandler.setText(searchController.text);
+            searchHandler.setCharLength(searchController.text.length);
           },
           decoration: InputDecoration(
             contentPadding: EdgeInsets.all(0),
@@ -55,7 +56,7 @@ class SearchBar extends StatelessWidget {
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: searchHandler.charLength > 0
                   ? IconButton(
-                      onPressed: () => _searchController.clear(),
+                      onPressed: () => searchController.clear(),
                       icon: Icon(Icons.clear),
                       color: onSurfaceMediumEmphasis,
                     )

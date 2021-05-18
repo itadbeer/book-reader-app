@@ -44,9 +44,8 @@ class BookScreen extends StatelessWidget {
 
   getCategoriesInfo(context, Book book) {
     List<Widget> categories = [];
-    Category category;
     for (int theCategoryId in book.categoryId) {
-      category = getCategory(context, categoryId: theCategoryId);
+      Category category = getCategory(context, categoryId: theCategoryId);
       categories.add(GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, '/category', arguments: category);

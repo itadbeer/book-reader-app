@@ -1,16 +1,16 @@
 import 'package:ibr/ibr.dart';
 import 'package:ibr/models/book.dart';
-import 'package:ibr/models/publisher.dart';
+import 'package:ibr/models/translator.dart';
 import 'package:ibr/screens/book/widgets/horizontalProductCard.dart';
 
 class TranslatorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Publisher publisher = ModalRoute.of(context).settings.arguments;
+    final Translator translator = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       extendBody: true,
       appBar: TopBar(
-          title: publisher.name,
+          title: translator.name,
           displayGoBackButton: true,
           displayActionButton: false),
       body: SingleChildScrollView(
@@ -35,7 +35,7 @@ class TranslatorScreen extends StatelessWidget {
                     Container(
                       width: MediaQuery.of(context).size.width - 32,
                       margin: EdgeInsets.only(bottom: 24),
-                      child: Text(publisher.description,
+                      child: Text(translator.description,
                           style: TextStyle(
                               color: onSurfaceMediumEmphasis,
                               fontSize: 16,
@@ -57,7 +57,7 @@ class TranslatorScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                showCategoryBooks(context, publisher),
+                showCategoryBooks(context, translator),
               ]))),
       bottomNavigationBar: MyFloatingNavigationBar(),
     );
@@ -76,10 +76,10 @@ class TranslatorScreen extends StatelessWidget {
     ]);
   }
 
-  showCategoryBooks(BuildContext context, Publisher publisher) {
+  showCategoryBooks(BuildContext context, Translator translator) {
     List<Widget> booksWidgets = [];
     return FutureBuilder(
-      future: getBooks(limit: 0, publisherId: publisher.id), // async work
+      future: getBooks(limit: 0, translatorId: translator.id), // async work
       builder: (BuildContext context, AsyncSnapshot<List<Book>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:

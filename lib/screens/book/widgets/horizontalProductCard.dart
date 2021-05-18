@@ -28,7 +28,10 @@ class HorizontalProductCard extends StatelessWidget {
               width: 72,
               height: 92.11,
               child: GestureDetector(
-                onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
+                onTap: () => {
+                  Navigator.pushNamed(context, '/singleProduct',
+                      arguments: book)
+                },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: CachedNetworkImage(
@@ -43,7 +46,10 @@ class HorizontalProductCard extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(top: 16, bottom: 20),
                 child: GestureDetector(
-                  onTap: () => {Navigator.pushNamed(context, '/singleProduct')},
+                  onTap: () => {
+                    Navigator.pushNamed(context, '/singleProduct',
+                        arguments: book)
+                  },
                   child: Text(
                     book.name,
                     overflow: TextOverflow.ellipsis,

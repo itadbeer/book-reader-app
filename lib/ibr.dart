@@ -28,6 +28,7 @@ export 'package:ibr/providers/textBoxProvider.dart';
 export 'package:ibr/providers/buttonProvider.dart';
 export 'package:ibr/providers/timerProvider.dart';
 export 'package:ibr/providers/bookProvider.dart';
+export 'package:ibr/providers/searchFieldHandler.dart';
 
 // Screens
 export 'package:ibr/screens/publisher/publisher.dart';

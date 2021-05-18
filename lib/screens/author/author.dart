@@ -1,16 +1,16 @@
 import 'package:ibr/ibr.dart';
+import 'package:ibr/models/author.dart';
 import 'package:ibr/models/book.dart';
-import 'package:ibr/models/publisher.dart';
 import 'package:ibr/screens/book/widgets/horizontalProductCard.dart';
 
 class AuthorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Publisher publisher = ModalRoute.of(context).settings.arguments;
+    final Author author = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       extendBody: true,
       appBar: TopBar(
-          title: publisher.name,
+          title: author.name,
           displayGoBackButton: true,
           displayActionButton: false),
       body: SingleChildScrollView(
@@ -35,7 +35,7 @@ class AuthorScreen extends StatelessWidget {
                     Container(
                       width: MediaQuery.of(context).size.width - 32,
                       margin: EdgeInsets.only(bottom: 24),
-                      child: Text(publisher.description,
+                      child: Text(author.description,
                           style: TextStyle(
                               color: onSurfaceMediumEmphasis,
                               fontSize: 16,
@@ -57,7 +57,7 @@ class AuthorScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                showCategoryBooks(context, publisher),
+                showCategoryBooks(context, author),
               ]))),
       bottomNavigationBar: MyFloatingNavigationBar(),
     );
@@ -76,10 +76,10 @@ class AuthorScreen extends StatelessWidget {
     ]);
   }
 
-  showCategoryBooks(BuildContext context, Publisher publisher) {
+  showCategoryBooks(BuildContext context, Author author) {
     List<Widget> booksWidgets = [];
     return FutureBuilder(
-      future: getBooks(limit: 0, publisherId: publisher.id), // async work
+      future: getBooks(limit: 0, authorId: author.id), // async work
       builder: (BuildContext context, AsyncSnapshot<List<Book>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:

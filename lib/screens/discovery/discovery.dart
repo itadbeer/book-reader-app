@@ -4,6 +4,7 @@ import 'package:ibr/screens/discovery/widgets/booksRow.dart';
 import 'package:ibr/screens/discovery/widgets/searchBar.dart';
 
 class Discovery extends StatelessWidget {
+  final TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final mobile = GetStorage().read('mobile');
@@ -37,6 +38,7 @@ class Discovery extends StatelessWidget {
   GestureDetector showSearchBar(BuildContext context) {
     return GestureDetector(
       child: SearchBar(
+        searchController: _searchController,
         enabled: false,
       ),
       onTap: () {
