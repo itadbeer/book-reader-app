@@ -79,6 +79,23 @@ if __name__ == "__main__":
                 abort(400)
 
     # Books Routes
+    @app.route('/book/all')
+    @versioning
+    @require_authentication
+    def get_all_books():
+        if request_version == "1.0":
+            limit = int(request.args.get("limit"))
+            category_id = request.args.get("category_id")
+            return jsonify(results=book.get_all(limit,category_id))
+
+    @app.route('/book/search')
+    @versioning
+    @require_authentication
+    def search_in_books():
+        if request_version == "1.0":
+            name = request.args.get("name")
+            return jsonify(results=book.search(name=name))
+
     @app.route('/book/add', methods=['POST'])
     @require_authentication
     @versioning
@@ -169,15 +186,6 @@ if __name__ == "__main__":
                 return jsonify(book.get(book_id))
             else:
                 abort(404)
-
-    @app.route('/book/all')
-    @versioning
-    @require_authentication
-    def get_all_books():
-        if request_version == "1.0":
-            limit = int(request.args.get("limit"))
-            category_id = request.args.get("category_id")
-            return jsonify(results=book.get_all(limit,category_id))
 
     # Category
     @app.route('/category/add', methods=['POST'])

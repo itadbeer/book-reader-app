@@ -100,6 +100,37 @@ class Book:
             return book_dict
         return book_dict
 
+    def search(self, name:str) -> List:
+        """
+            Search for books that contains a string in their titles
+            and return the result as a List, return empty list as if
+            there is no match for the requested search term
+        """
+        query = f"SELECT * FROM {self.table_name} WHERE name ILIKE %s"
+        try:
+            db.cursor.execute(query,(f"%{name}%",))
+            books: List[Any] = db.cursor.fetchall()
+        except db.Error:
+            return []
+        books_array = []
+        for book in books:
+            book_dict = {
+                'id': book[0],
+                'name': book[1],
+                'description': book[2],
+                'author_id': book[3],
+                'price': book[4],
+                'image': book[5],
+                'discount_percentage': book[6],
+                'pages_count': book[7],
+                'publisher_id': book[8],
+                'category_id': book[9],
+                'translator_id': book[10],
+                'publish_date': book[11]
+            }
+            books_array.append(book_dict)
+        return books_array
+
     def get_all(self, limit: int=0, category_id:int =None) -> List:
         """ Get all of books and return as a List """
         query = f"SELECT * FROM {self.table_name}"
