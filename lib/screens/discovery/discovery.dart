@@ -43,9 +43,9 @@ class Discovery extends StatelessWidget {
       ),
       onTap: () {
         showSearch(
-            context: context,
-            delegate: CustomSearchDelegate(hintText: "جست‌وجو"),
-            query: "متن تستی");
+          context: context,
+          delegate: CustomSearchDelegate(hintText: "جست‌وجو"),
+        );
       },
     );
   }

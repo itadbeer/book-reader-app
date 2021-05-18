@@ -24,7 +24,13 @@ class SearchBar extends StatelessWidget {
         height: height ?? 56,
         child: TextField(
           controller: searchController,
-          onEditingComplete: onSubmitted ?? () {},
+          onEditingComplete: () {
+            onSubmitted();
+            // as query is going to be reset after submittion,
+            // we set char length to 0 to avoid showing clear button
+            // while we technically have nothing in textbox
+            searchHandler.setCharLength(0);
+          },
           enabled: enabled,
           onChanged: (String value) {
             searchHandler.setCharLength(searchController.text.length);

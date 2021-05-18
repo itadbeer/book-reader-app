@@ -39,6 +39,7 @@ class CustomSearchDelegate extends SearchDelegate {
             color: onSurfaceMediumEmphasis,
           ),
           onPressed: () {
+            Provider.of<SearchHandler>(context, listen: false).setCharLength(0);
             close(context, null);
           }),
       Expanded(
@@ -73,17 +74,19 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return Container(
-        child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Container(
-                child: Column(children: [
-              showMatchedBooks(context),
-              ...showMatchedCategories(context),
-              ...showMatchedAuthors(context),
-              ...showMatchedTranslators(context),
-              ...showMatchedPublishers(context),
-            ]))));
+    return query.isNotEmpty
+        ? Container(
+            child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Container(
+                    child: Column(children: [
+                  showMatchedBooks(context),
+                  ...showMatchedCategories(context),
+                  ...showMatchedAuthors(context),
+                  ...showMatchedTranslators(context),
+                  ...showMatchedPublishers(context),
+                ]))))
+        : Container();
   }
 
   showMatchedBooks(BuildContext context) {
