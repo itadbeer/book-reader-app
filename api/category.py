@@ -59,9 +59,9 @@ class Category:
     def get_all(self, limit=0) -> List:
         """ Get all of categories and return as a List """
         if limit == 0:
-            query = f"SELECT * FROM {self.table_name}"
+            query = f"SELECT * FROM {self.table_name} ORDER BY id DESC"
         else:
-            query = f"SELECT * FROM {self.table_name} LIMIT {limit}"
+            query = f"SELECT * FROM {self.table_name} ORDER BY id DESC LIMIT {limit}"
         try:
             db.cursor.execute(query)
             categories: List[Any] = db.cursor.fetchall()

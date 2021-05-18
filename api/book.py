@@ -135,7 +135,9 @@ class Book:
         """ Get all of books and return as a List """
         query = f"SELECT * FROM {self.table_name}"
         if category_id != None:
-            query += f" WHERE '{category_id}'=ANY(category_id)"
+            query += f" WHERE '{category_id}'=ANY(category_id) ORDER BY id DESC"
+        else:
+            query += " ORDER BY id DESC "
         if limit != 0:
             query += f" LIMIT {limit}"
         try:

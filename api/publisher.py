@@ -59,7 +59,7 @@ class Publisher:
 
     def get_all(self) -> List:
         """ Get all of categories and return as a List """
-        query = f"SELECT * FROM {self.table_name}"
+        query = f"SELECT * FROM {self.table_name} ORDER BY id DESC"
         try:
             db.cursor.execute(query)
             publishers: List[Any] = db.cursor.fetchall()
