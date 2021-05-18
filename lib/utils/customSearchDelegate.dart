@@ -50,7 +50,9 @@ class CustomSearchDelegate extends SearchDelegate {
               width: 318,
               height: 40,
               onSubmitted: () {
-                query = _searchController.text;
+                if (_searchController.text.isNotEmpty) {
+                  query = _searchController.text;
+                }
               },
             )),
       )

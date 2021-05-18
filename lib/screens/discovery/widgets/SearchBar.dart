@@ -27,7 +27,6 @@ class SearchBar extends StatelessWidget {
           onEditingComplete: onSubmitted ?? () {},
           enabled: enabled,
           onChanged: (String value) {
-            // searchHandler.setText(searchController.text);
             searchHandler.setCharLength(searchController.text.length);
           },
           decoration: InputDecoration(
