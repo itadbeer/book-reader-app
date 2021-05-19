@@ -1,8 +1,16 @@
 import 'package:ibr/ibr.dart';
+import 'package:ibr/models/book.dart';
+import 'package:intl/intl.dart';
 
 class PurchaseConfirmationDialog extends StatelessWidget {
+  final Book book;
+  const PurchaseConfirmationDialog({Key key, this.book}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var money =
+        NumberFormat.currency(locale: "en_US", symbol: "", decimalDigits: 0);
+    final double finalPrice =
+        (book.price / 100) * (100 - book.discountPercentage);
     return Dialog(
       insetPadding: EdgeInsets.zero,
       child: Container(
@@ -38,8 +46,7 @@ class PurchaseConfirmationDialog extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(4),
                       child: CachedNetworkImage(
-                        imageUrl:
-                            'https://imgcdn.taaghche.com/frontCover/38729.jpg',
+                        imageUrl: book.image,
                         width: 36,
                         height: 48,
                       ),
@@ -54,7 +61,7 @@ class PurchaseConfirmationDialog extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(bottom: 16),
                       child: Text(
-                        "ترجمه لغات و اصطلاحات کل سلسله العربیة بین یدیک",
+                        book.name,
                         style: TextStyle(
                             color: onSurfaceMediumEmphasis,
                             fontSize: 12,
@@ -80,7 +87,7 @@ class PurchaseConfirmationDialog extends StatelessWidget {
                 ),
               ),
               Container(
-                child: Text("11,250",
+                child: Text(money.format(finalPrice),
                     style: TextStyle(
                         color: myTheme.primaryColor,
                         fontSize: 14,
@@ -103,8 +110,7 @@ class PurchaseConfirmationDialog extends StatelessWidget {
                       margin: EdgeInsets.only(bottom: 8),
                       child: Button(
                           onPressed: () {
-                            LoadingDialog();
-                            pay();
+                            pay(finalPrice, "خرید کتاب ${book.name}");
                           },
                           textAlign: TextAlign.center,
                           padding: EdgeInsets.all(0),
@@ -137,22 +143,24 @@ class PurchaseConfirmationDialog extends StatelessWidget {
   }
 }
 
-void pay() {
+void pay(num finalPrice, String description) {
 // Initialize payment request
   PaymentRequest _paymentRequest = PaymentRequest()
-    ..setIsSandBox(true)
-    ..setMerchantID("32aaa4d0-a667-11e9-98b0-000c29344814")
-    ..setAmount(1000)
+    ..setIsSandBox(!isProduction)
+    ..setMerchantID(merchantID)
+    ..setAmount(finalPrice)
     ..setCallbackURL(
-        "https://edrisranjbar.ir") //The callback can be an android scheme or a website URL, you and can pass any data with The callback for both scheme and  URL
-    ..setDescription("Payment Description");
+        callbackURL) //The callback can be an android scheme or a website URL, you and can pass any data with The callback for both scheme and  URL
+    ..setDescription(description);
 // For scheme you can use uni_links dart Package
-
   String _paymentUrl = null;
 // Call Start payment
   ZarinPal().startPayment(_paymentRequest,
       (int status, String paymentGatewayUri) {
-    if (status == 100) _paymentUrl = paymentGatewayUri; // launch URL in browser
+    if (status == 100) {
+      _paymentUrl = paymentGatewayUri;
+      launchURL(_paymentUrl);
+    }
   });
 
 // Vefrication Payment

@@ -9,6 +9,7 @@ export 'package:http/http.dart';
 export 'dart:convert';
 export 'package:get_storage/get_storage.dart';
 export 'package:zarinpal/zarinpal.dart';
+export 'package:url_launcher/url_launcher.dart';
 export 'dart:io';
 
 // API functions
@@ -23,6 +24,7 @@ export 'package:ibr/api/translator.dart';
 // Functions
 export 'package:ibr/functions/validation.dart';
 export 'package:ibr/functions/authentication.dart';
+export 'package:ibr/functions/browser.dart';
 
 // Providers
 export 'package:ibr/providers/userHandler.dart';
@@ -56,6 +58,8 @@ export 'package:ibr/utils/customSearchDelegate.dart';
 export 'package:ibr/utils/myTextBox.dart';
 export 'package:ibr/utils/loadingDialog.dart';
 
+const bool isProduction = false;
+
 enum DownloadStatus { downloaded, downloading, normal }
 
 // API configurations
@@ -64,3 +68,7 @@ Map<String, String> headers = {
   'api_version': '1.0',
   'secret_key': 'thisisasimpletest,justatest,yeah,no,yeah,no,tea,coffe,test',
 };
+
+// Zarinpal Gateway configurations
+const String merchantID = "32aaa4d0-a667-11e9-98b0-000c29344814";
+const String callbackURL = "https://edrisranjbar.ir";

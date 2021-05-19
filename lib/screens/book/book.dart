@@ -144,13 +144,11 @@ class BookScreen extends StatelessWidget {
                                   fontSize: 14)),
                         )
                       : Container(),
-                  RichText(
-                      text: TextSpan(
-                          text: money.format(finalPrice),
-                          style: TextStyle(
-                              color: myTheme.primaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500))),
+                  Text(money.format(finalPrice),
+                      style: TextStyle(
+                          color: myTheme.primaryColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500)),
                   Text(" تومان",
                       style: TextStyle(
                           color: onSurfaceMediumEmphasis, fontSize: 12))
@@ -165,7 +163,9 @@ class BookScreen extends StatelessWidget {
                         showDialog(
                             context: context,
                             builder: (BuildContext context) =>
-                                PurchaseConfirmationDialog());
+                                PurchaseConfirmationDialog(
+                                  book: book,
+                                ));
                       } else {
                         Navigator.pushNamed(context, '/login');
                       }

@@ -97,13 +97,11 @@ Container showBookCard(BuildContext context, Book book) {
                             : Row(),
                         Row(
                           children: [
-                            RichText(
-                                text: TextSpan(
-                                    text: money.format(finalPrice),
-                                    style: TextStyle(
-                                        color: myTheme.primaryColor,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500))),
+                            Text(money.format(finalPrice),
+                                style: TextStyle(
+                                    color: myTheme.primaryColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500)),
                             Text(" تومان",
                                 style: TextStyle(
                                     color: onSurfaceMediumEmphasis,

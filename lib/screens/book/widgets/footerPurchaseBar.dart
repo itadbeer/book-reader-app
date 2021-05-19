@@ -60,13 +60,11 @@ class FooterPurchaseBar extends StatelessWidget {
                                 fontSize: 14)),
                       )
                     : Container(),
-                RichText(
-                    text: TextSpan(
-                        text: finalPrice,
-                        style: TextStyle(
-                            color: myTheme.primaryColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500))),
+                Text(finalPrice,
+                    style: TextStyle(
+                        color: myTheme.primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500)),
                 Text(" تومان",
                     style:
                         TextStyle(color: onSurfaceMediumEmphasis, fontSize: 12))

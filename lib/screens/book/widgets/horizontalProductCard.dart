@@ -9,8 +9,8 @@ class HorizontalProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var money =
         NumberFormat.currency(locale: "en_US", symbol: "", decimalDigits: 0);
-    final int finalPrice =
-        ((book.price / 100) * (100 - book.discountPercentage)) as int;
+    final double finalPrice =
+        ((book.price / 100) * (100 - book.discountPercentage));
     return Container(
       padding: EdgeInsets.only(left: 16),
       height: 96,
@@ -97,15 +97,11 @@ class HorizontalProductCard extends StatelessWidget {
                                 fontSize: 14)),
                       )
                     : Container(),
-                RichText(
-                    text: TextSpan(
-                        text: finalPrice > 0
-                            ? money.format(finalPrice)
-                            : "رایگان",
-                        style: TextStyle(
-                            color: myTheme.primaryColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500))),
+                Text(finalPrice > 0 ? money.format(finalPrice) : "رایگان",
+                    style: TextStyle(
+                        color: myTheme.primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500)),
                 Text(finalPrice > 0 ? " تومان" : "",
                     style:
                         TextStyle(color: onSurfaceMediumEmphasis, fontSize: 12))
