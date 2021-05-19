@@ -405,4 +405,6 @@ if __name__ == "__main__":
     def get_all_translators():
         if request_version == "1.0":
             return jsonify(results=translator.get_all())
-    app.run(host=API_HOST, port=API_PORT, debug= not IS_PRODUCTION)
+    
+    context = ('cert.pem', 'key.pem')
+    app.run(host=API_HOST, port=API_PORT, debug= not IS_PRODUCTION, ssl_context=context)

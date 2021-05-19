@@ -1,5 +1,4 @@
 import 'package:ibr/ibr.dart';
-import 'package:ibr/utils/loadingDialog.dart';
 
 class PurchaseConfirmationDialog extends StatelessWidget {
   @override
@@ -101,14 +100,12 @@ class PurchaseConfirmationDialog extends StatelessWidget {
                       margin: EdgeInsets.only(bottom: 8),
                       child: Button(
                           onPressed: () {
-                            showDialog(
-                                context: context,
-                                barrierDismissible: false,
-                                builder: (BuildContext context) =>
-                                    LoadingDialog());
-                            Future.delayed(new Duration(seconds: 3), () {
-                              Navigator.pop(context);
-                            });
+                            // showDialog(
+                            //     context: context,
+                            //     barrierDismissible: false,
+                            //     builder: (BuildContext context) =>
+                            //         LoadingDialog());
+                            pay();
                           },
                           textAlign: TextAlign.center,
                           padding: EdgeInsets.symmetric(vertical: 8),
@@ -136,4 +133,37 @@ class PurchaseConfirmationDialog extends StatelessWidget {
       ),
     );
   }
+}
+
+void pay() {
+// Initialize payment request
+  PaymentRequest _paymentRequest = PaymentRequest()
+    ..setIsSandBox(true)
+    ..setMerchantID("32aaa4d0-a667-11e9-98b0-000c29344814")
+    ..setAmount(1000)
+    ..setCallbackURL(
+        "https://edrisranjbar.ir") //The callback can be an android scheme or a website URL, you and can pass any data with The callback for both scheme and  URL
+    ..setDescription("Payment Description");
+// For scheme you can use uni_links dart Package
+
+  String _paymentUrl = null;
+// Call Start payment
+  ZarinPal().startPayment(_paymentRequest,
+      (int status, String paymentGatewayUri) {
+    if (status == 100) _paymentUrl = paymentGatewayUri; // launch URL in browser
+  });
+
+// Vefrication Payment
+// if you set the scheme in your application, You can get the Status and Authority from scheme callback
+// if your callback is a website URL like htt://mydomain.com you don't need verificationPayment function
+
+  ZarinPal()
+      .verificationPayment("Status", "Authority Call back", _paymentRequest,
+          (isPaymentSuccess, refID, paymentRequest) {
+    if (isPaymentSuccess) {
+      // Payment Is Success
+    } else {
+      // Error Print Status
+    }
+  });
 }

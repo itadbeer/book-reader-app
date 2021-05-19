@@ -33,6 +33,7 @@ dependencies:
   provider:
   cached_network_image: ^3.0.0
   get_storage:
+  zarinpal: ^1.0.4
 
 dev_dependencies:
   test:

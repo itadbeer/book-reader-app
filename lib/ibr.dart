@@ -8,6 +8,8 @@ export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:http/http.dart';
 export 'dart:convert';
 export 'package:get_storage/get_storage.dart';
+export 'package:zarinpal/zarinpal.dart';
+export 'dart:io';
 
 // API functions
 export 'package:ibr/api/author.dart';
@@ -57,7 +59,7 @@ export 'package:ibr/utils/loadingDialog.dart';
 enum DownloadStatus { downloaded, downloading, normal }
 
 // API configurations
-String endpoint = "http://127.0.0.1:7000/";
+String endpoint = "https://192.168.0.102:7000/";
 Map<String, String> headers = {
   'api_version': '1.0',
   'secret_key': 'thisisasimpletest,justatest,yeah,no,yeah,no,tea,coffe,test',

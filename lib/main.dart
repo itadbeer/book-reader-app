@@ -8,8 +8,21 @@ import 'package:ibr/models/translator.dart';
 import 'package:ibr/providers/searchFieldHandler.dart';
 import 'package:ibr/ibr.dart';
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+
 void main() async {
   await GetStorage.init();
+
+  // Remove when we are in development mode
+  HttpOverrides.global = new MyHttpOverrides();
+
   runApp(MyApp());
 }
 
