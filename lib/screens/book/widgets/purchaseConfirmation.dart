@@ -111,12 +111,13 @@ class PurchaseConfirmationDialog extends StatelessWidget {
                           padding: EdgeInsets.symmetric(vertical: 8),
                           text: "انتقال به درگاه پرداخت",
                           height: 40,
-                          width: 232)))
+                          width: double.infinity)))
             ],
           ),
           Row(
             children: [
-              Button(
+              Expanded(
+                child: Button(
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -126,7 +127,9 @@ class PurchaseConfirmationDialog extends StatelessWidget {
                   backgroundColor: onPrimaryHighEmphasis,
                   textColor: myTheme.primaryColor,
                   height: 40,
-                  width: 232)
+                  width: double.infinity,
+                ),
+              )
             ],
           ),
         ]),
