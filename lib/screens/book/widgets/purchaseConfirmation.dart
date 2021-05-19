@@ -28,45 +28,43 @@ class PurchaseConfirmationDialog extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(
-            child: Row(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 8, bottom: 16),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(4),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              'https://imgcdn.taaghche.com/frontCover/38729.jpg',
-                          width: 36,
-                          height: 48,
-                        ),
+          Row(
+            children: [
+              Column(
+                children: [
+                  Container(
+                    width: 36,
+                    margin: EdgeInsets.only(left: 8, bottom: 16),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            'https://imgcdn.taaghche.com/frontCover/38729.jpg',
+                        width: 36,
+                        height: 48,
                       ),
                     ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(bottom: 16),
+                      child: Text(
+                        "ترجمه لغات و اصطلاحات کل سلسله العربیة بین یدیک",
+                        style: TextStyle(
+                            color: onSurfaceMediumEmphasis,
+                            fontSize: 12,
+                            height: 1.5),
+                      ),
+                    )
                   ],
                 ),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Flexible(
-                        child: Container(
-                          margin: EdgeInsets.only(bottom: 16),
-                          child: Text(
-                            "ترجمه لغات و اصطلاحات کل سلسله العربیة بین یدیک",
-                            style: TextStyle(
-                                color: onSurfaceMediumEmphasis,
-                                fontSize: 12,
-                                height: 1.5),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
+              )
+            ],
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
