@@ -25,7 +25,6 @@ class MyTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textBoxProvider = Provider.of<TextBoxProvider>(context);
-    print(textBoxProvider.state);
     return Column(
       children: [
         Row(

@@ -79,16 +79,21 @@ class PurchaseConfirmationDialog extends StatelessWidget {
                       height: 1.5),
                 ),
               ),
-              RichText(
-                  text: TextSpan(
-                      text: "11,250",
-                      style: TextStyle(
-                          color: myTheme.primaryColor,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500))),
-              Text(" تومان",
-                  style:
-                      TextStyle(color: onSurfaceMediumEmphasis, fontSize: 12))
+              Container(
+                child: Text("11,250",
+                    style: TextStyle(
+                        color: myTheme.primaryColor,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        height: 1.6)),
+              ),
+              Container(
+                child: Text(" تومان",
+                    style: TextStyle(
+                        color: onSurfaceMediumEmphasis,
+                        fontSize: 12,
+                        height: 1.5)),
+              )
             ],
           ),
           Row(
@@ -98,15 +103,11 @@ class PurchaseConfirmationDialog extends StatelessWidget {
                       margin: EdgeInsets.only(bottom: 8),
                       child: Button(
                           onPressed: () {
-                            // showDialog(
-                            //     context: context,
-                            //     barrierDismissible: false,
-                            //     builder: (BuildContext context) =>
-                            //         LoadingDialog());
+                            LoadingDialog();
                             pay();
                           },
                           textAlign: TextAlign.center,
-                          padding: EdgeInsets.symmetric(vertical: 8),
+                          padding: EdgeInsets.all(0),
                           text: "انتقال به درگاه پرداخت",
                           height: 40,
                           width: double.infinity)))
@@ -120,7 +121,7 @@ class PurchaseConfirmationDialog extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   textAlign: TextAlign.center,
-                  padding: EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.all(0),
                   text: "انصراف",
                   backgroundColor: onPrimaryHighEmphasis,
                   textColor: myTheme.primaryColor,
