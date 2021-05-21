@@ -10,7 +10,9 @@ export 'dart:convert';
 export 'package:get_storage/get_storage.dart';
 export 'package:zarinpal/zarinpal.dart';
 export 'package:url_launcher/url_launcher.dart';
+export 'package:uni_links/uni_links.dart';
 export 'dart:io';
+export 'dart:async';
 
 // API functions
 export 'package:ibr/api/author.dart';
@@ -25,6 +27,7 @@ export 'package:ibr/api/translator.dart';
 export 'package:ibr/functions/validation.dart';
 export 'package:ibr/functions/authentication.dart';
 export 'package:ibr/functions/browser.dart';
+export 'package:ibr/functions/payment.dart';
 
 // Providers
 export 'package:ibr/providers/userHandler.dart';
@@ -33,6 +36,7 @@ export 'package:ibr/providers/buttonProvider.dart';
 export 'package:ibr/providers/timerProvider.dart';
 export 'package:ibr/providers/bookProvider.dart';
 export 'package:ibr/providers/searchFieldHandler.dart';
+export 'package:ibr/providers/paymentProvider.dart';
 
 // Screens
 export 'package:ibr/screens/publisher/publisher.dart';
@@ -71,4 +75,4 @@ Map<String, String> headers = {
 
 // Zarinpal Gateway configurations
 const String merchantID = "32aaa4d0-a667-11e9-98b0-000c29344814";
-const String callbackURL = "https://edrisranjbar.ir";
+const String callbackURL = "ibr://islamicbookreader.com";

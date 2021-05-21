@@ -29,6 +29,8 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final PaymentProvider paymentProvider = PaymentProvider();
+    paymentProvider.handleIncomingPaymentLinks();
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<SearchHandler>(
@@ -61,6 +63,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<BookProvider>(
           create: (context) => BookProvider(),
+        ),
+        ChangeNotifierProvider<PaymentProvider>(
+          create: (context) => paymentProvider,
         ),
       ],
       child: MaterialApp(
